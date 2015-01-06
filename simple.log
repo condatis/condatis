@@ -1,0 +1,17 @@
+--------------------------------------------------------------------------------
+2015-01-06, 15:20:32
+--------------------------------------------------------------------------------
+<type 'exceptions.AttributeError'>: 
+Project instance has no attribute 'calcSplitLevels'
+--------------------------------------------------------------------------------
+  File "./condatis.py", line 1304, in calc
+    self.docalc()
+  File "./condatis.py", line 1289, in docalc
+    self.voltageView()
+  File "./condatis.py", line 1408, in voltageView
+    self.selectView(self.fVoltView,self.voltTips)
+  File "./condatis.py", line 1393, in selectView
+    self.fCurrentView[i](self.fig[i].canvas,self.project)
+  File "/Users/dww/Dropbox/git/clone/condatis/ecoplot.py", line 339, in showVoltageLayers
+    project.calcSplitLevels()
+0.4.18

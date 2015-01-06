@@ -1,0 +1,492 @@
+INFO:root:No project
+INFO:root:No project
+INFO:root:Loading project: /Users/dww/condatis/projects/aa.h5
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Closing the project.
+INFO:root:No project
+INFO:root:Loading project: /Users/dww/condatis/projects/aa.h5
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Loading project: /Users/dww/condatis/projects/arse.h5
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Loading project: /Users/dww/condatis/projects/arse.h5
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Loading project: /Users/dww/condatis/projects/arse.h5
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Loading project: /Users/dww/condatis/projects/arse.h5
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Loading project: /Users/dww/condatis/projects/arse.h5
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has Dropping
+INFO:root:Creating new project
+INFO:root:Making new project with filename: /Users/dww/condatis/projects/ab.h5
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Creating new project
+INFO:root:Making new project with filename: /Users/dww/condatis/projects/ab.h5
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Creating new project
+INFO:root:Making new project with filename: /Users/dww/condatis/projects/ab.h5
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+DEBUG:root:Minimum cut: 0.000000
+DEBUG:root:Max a: 1
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Creating new project
+INFO:root:Making new project with filename: /Users/dww/condatis/projects/ab.h5
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+DEBUG:root:Minimum cut: 0.000000
+DEBUG:root:Max a: 1
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Assigning source and target.
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Getting input data
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Evaluating in distances
+INFO:root:Done
+INFO:root:Getting output data
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Evaluating out distances
+INFO:root:Done
+INFO:root:Getting free data
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Evaluating free distances
+INFO:root:Done
+INFO:root:Evaluating input conductances
+INFO:root:Done
+INFO:root:Summing
+INFO:root:Outer sum
+INFO:root:Done
+INFO:root:ipv_in calculated.
+INFO:root:Evaluating output conductances
+INFO:root:Done
+INFO:root:Summing
+INFO:root:Outer sum
+INFO:root:Done
+INFO:root:ipv_out calculated.
+INFO:root:Evaluating free conductances
+INFO:root:Done
+INFO:root:Setting diagonals to zero
+INFO:root:Done
+INFO:root:ipv_free calculated.
+DEBUG:root:Size is: 1024
+INFO:root:Making tmp1
+INFO:root:Outer sum
+INFO:root:Calculating tmp1a
+INFO:root:Making tmp2
+INFO:root:Calculating tmp2
+INFO:root:Making M0
+INFO:root:Calculating M0
+INFO:root:Doing solve
+INFO:root:Calling LAPACK
+INFO:root:Done solve
+INFO:root:Doing I0
+INFO:root:Done I0
+INFO:root:Doing Vij
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Doing I2ij
+INFO:root:Doing Sum(I2ij)
+INFO:root:Outer sum
+INFO:root:Storing sum(I2ij)
+INFO:root:Doing total link strength
+INFO:root:Voltages calculated.
+INFO:root:Garbage collected
+INFO:root:Creating new project
+INFO:root:Making new project with filename: /Users/dww/condatis/projects/aa.h5
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+INFO:root:Has project
+DEBUG:root:Getting length of children 0
+DEBUG:root:Minimum cut: 0.000000
+DEBUG:root:Max a: 1
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Assigning source and target.
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Getting input data
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Evaluating in distances
+INFO:root:Done
+INFO:root:Getting output data
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Evaluating out distances
+INFO:root:Done
+INFO:root:Getting free data
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Evaluating free distances
+INFO:root:Done
+INFO:root:Evaluating input conductances
+INFO:root:Done
+INFO:root:Summing
+INFO:root:Outer sum
+INFO:root:Done
+INFO:root:ipv_in calculated.
+INFO:root:Evaluating output conductances
+INFO:root:Done
+INFO:root:Summing
+INFO:root:Outer sum
+INFO:root:Done
+INFO:root:ipv_out calculated.
+INFO:root:Evaluating free conductances
+INFO:root:Done
+INFO:root:Setting diagonals to zero
+INFO:root:Done
+INFO:root:ipv_free calculated.
+DEBUG:root:Size is: 1024
+INFO:root:Making tmp1
+INFO:root:Outer sum
+INFO:root:Calculating tmp1a
+INFO:root:Making tmp2
+INFO:root:Calculating tmp2
+INFO:root:Making M0
+INFO:root:Calculating M0
+INFO:root:Doing solve
+INFO:root:Calling LAPACK
+INFO:root:Done solve
+INFO:root:Doing I0
+INFO:root:Done I0
+INFO:root:Doing Vij
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Doing I2ij
+INFO:root:Doing Sum(I2ij)
+INFO:root:Outer sum
+INFO:root:Storing sum(I2ij)
+INFO:root:Doing total link strength
+INFO:root:Voltages calculated.
+INFO:root:Garbage collected
+INFO:root:Loading project: /Users/dww/condatis/projects/aa.h5
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Getting input data
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Evaluating in distances
+INFO:root:Done
+INFO:root:Getting output data
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Evaluating out distances
+INFO:root:Done
+INFO:root:Getting free data
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Evaluating free distances
+INFO:root:Done
+INFO:root:Evaluating input conductances
+INFO:root:Done
+INFO:root:Summing
+INFO:root:Outer sum
+INFO:root:Done
+INFO:root:ipv_in calculated.
+INFO:root:Evaluating output conductances
+INFO:root:Done
+INFO:root:Summing
+INFO:root:Outer sum
+INFO:root:Done
+INFO:root:ipv_out calculated.
+INFO:root:Evaluating free conductances
+INFO:root:Done
+INFO:root:Setting diagonals to zero
+INFO:root:Done
+INFO:root:ipv_free calculated.
+DEBUG:root:Size is: 1024
+INFO:root:Making tmp1
+INFO:root:Outer sum
+INFO:root:Calculating tmp1a
+INFO:root:Making tmp2
+INFO:root:Calculating tmp2
+INFO:root:Making M0
+INFO:root:Calculating M0
+INFO:root:Doing solve
+INFO:root:Calling LAPACK
+INFO:root:Done solve
+INFO:root:Doing I0
+INFO:root:Done I0
+INFO:root:Doing Vij
+INFO:root:Outer diff
+DEBUG:root:i: 0, start: 0, end: 4096
+DEBUG:root:i: 1, start: 4096, end: 8192
+INFO:root:Doing I2ij
+INFO:root:Doing Sum(I2ij)
+INFO:root:Outer sum
+INFO:root:Storing sum(I2ij)
+INFO:root:Doing total link strength
+INFO:root:Voltages calculated.
+INFO:root:Garbage collected
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:End of calc
+INFO:root:Clearing metrics
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Doing edge power
+INFO:root:Doing total power
+INFO:root:Calculating total edge power
+INFO:root:Calculating max edge power
+INFO:root:Calculating significant edge power
+DEBUG:root:max(pps): 0.000106
+INFO:root:Flattening
+INFO:root:Sorting
+INFO:root:Cumulative sum
+DEBUG:root:Power max and fraction is: 0.000212, 0.990000
+INFO:root:Finding Fraction
+INFO:root:Number of power links to plot: 1
+INFO:root:Rendering
+INFO:root:Before topNinds
+DEBUG:root:Inds dict not found
+DEBUG:root:Added to Inds
+INFO:root:After topNinds
+DEBUG:root:Min rend: 0.000000, max rend: 0.000106
+DEBUG:root:Min im: 0.000000, max im: 0.000106
+INFO:root:Showing voltage layers
+INFO:root:Setting title
+INFO:root:Drawing
+INFO:root:Done
+INFO:root:Flattening
+INFO:root:Sorting
+INFO:root:Cumulative sum
+DEBUG:root:Power max and fraction is: 0.000212, 0.990000
+INFO:root:Finding Fraction
+INFO:root:Number of power links to plot: 1
+INFO:root:Rendering
+INFO:root:Before topNinds
+DEBUG:root:Found a Inds dict
+INFO:root:After topNinds
+DEBUG:root:Min rend: 0.000000, max rend: 0.000106
+DEBUG:root:Min im: 0.000000, max im: 0.000106
+INFO:root:Showing voltage layers
+INFO:root:Setting title
+INFO:root:Drawing
+INFO:root:Done
+INFO:root:Flattening
+INFO:root:Sorting
+INFO:root:Cumulative sum
+DEBUG:root:Power max and fraction is: 0.000212, 0.990000
+INFO:root:Finding Fraction
+INFO:root:Number of power links to plot: 1
+INFO:root:Rendering
+INFO:root:Before topNinds
+DEBUG:root:Found a Inds dict
+INFO:root:After topNinds
+DEBUG:root:Min rend: 0.000000, max rend: 0.000106
+DEBUG:root:Min im: 0.000000, max im: 0.000106
+INFO:root:Showing voltage layers
+INFO:root:Setting title
+INFO:root:Drawing
+INFO:root:Done
+INFO:root:Flattening
+INFO:root:Sorting
+INFO:root:Cumulative sum
+DEBUG:root:Power max and fraction is: 0.000212, 0.990000
+INFO:root:Finding Fraction
+INFO:root:Number of power links to plot: 1
+INFO:root:Rendering
+INFO:root:Before topNinds
+DEBUG:root:Found a Inds dict
+INFO:root:After topNinds
+DEBUG:root:Min rend: 0.000000, max rend: 0.000106
+DEBUG:root:Min im: 0.000000, max im: 0.000106
+INFO:root:Showing voltage layers
+INFO:root:Setting title
+INFO:root:Drawing
+INFO:root:Done
+INFO:root:Population View
+INFO:root:Calculate Metrics
+INFO:root:Generating eigen matrix
+INFO:root:Getting eigenvalues and eigenvectors
+INFO:root:Eigenvalues and eigenvectors calculated
+INFO:root:Has project
+DEBUG:root:Getting length of children 1
+INFO:root:Has Scenario
+INFO:root:Can Calculate
+INFO:root:Has been calculated
+INFO:root:Population View
+INFO:root:Population View
+INFO:root:Calculating all flows
+DEBUG:root:Getting length of children 1
+DEBUG:root:Number of scenarios N=1
+DEBUG:root:In loop, i=0
+DEBUG:root:Getting length of children 1
+DEBUG:root:Getting length of children 1
+DEBUG:root:Getting length of children 1
+DEBUG:root:Getting length of children 1
+DEBUG:root:Getting length of children 1
+DEBUG:root:Getting length of children 1
+DEBUG:root:Getting length of children 1
+INFO:root:Calculating all flows
+DEBUG:root:Getting length of children 1
+DEBUG:root:Number of scenarios N=1
+DEBUG:root:In loop, i=0
+DEBUG:root:Getting length of children 1
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255
+DEBUG:root:nodeAreaA(): max(x): 255, max(y): 255

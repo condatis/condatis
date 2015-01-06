@@ -1,0 +1,1426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1142</width>
+    <height>658</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Condatis</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="MplWidget" name="mainfig" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>600</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Main map window</string>
+        </property>
+        <property name="statusTip">
+         <string>Main map window.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1142</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;Project</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionOpen_Habitat"/>
+    <addaction name="actionAdd_Source_Sink"/>
+    <addaction name="actionDuplicate_Scenario"/>
+    <addaction name="actionDelete_From_Scenarios"/>
+    <addaction name="actionRename_Scenario"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionClose"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <widget class="QMenu" name="menuComponents">
+     <property name="title">
+      <string>Components</string>
+     </property>
+     <addaction name="actionToggle_Navbar"/>
+     <addaction name="actionToggle_Subplots"/>
+     <addaction name="actionToggle_Sidebar"/>
+    </widget>
+    <addaction name="actionView_Map"/>
+    <addaction name="actionView_Voltage"/>
+    <addaction name="actionView_Power"/>
+    <addaction name="actionView_Population"/>
+    <addaction name="actionComparison_View"/>
+    <addaction name="separator"/>
+    <addaction name="menuComponents"/>
+    <addaction name="actionSmoothing"/>
+    <addaction name="actionDropping_View"/>
+   </widget>
+   <widget class="QMenu" name="menuCalculate">
+    <property name="title">
+     <string>&amp;Analysis</string>
+    </property>
+    <addaction name="actionConductance"/>
+    <addaction name="actionCalc_Power"/>
+    <addaction name="actionCalculate_Metrics"/>
+    <addaction name="actionForward_Optimise"/>
+    <addaction name="actionBackwards_Improvement"/>
+    <addaction name="actionDropping_Filter"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionWhats_This"/>
+    <addaction name="actionManual"/>
+   </widget>
+   <widget class="QMenu" name="menuApp">
+    <property name="title">
+     <string>App</string>
+    </property>
+    <addaction name="actionClose_App"/>
+    <addaction name="actionSettings"/>
+   </widget>
+   <widget class="QMenu" name="menuExport_2">
+    <property name="title">
+     <string>Export</string>
+    </property>
+    <addaction name="actionDropped_Habitat_2"/>
+    <addaction name="actionDropping_Map"/>
+    <addaction name="actionFlow_Map"/>
+    <addaction name="actionVoltage_Layers_Map"/>
+    <addaction name="actionVoltage_Map"/>
+    <addaction name="actionSource_Map"/>
+    <addaction name="actionSink_Map"/>
+    <addaction name="separator"/>
+    <addaction name="actionProject_Data"/>
+    <addaction name="actionScenario_Data"/>
+    <addaction name="actionDropping_Data"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionPoint"/>
+   </widget>
+   <addaction name="menuApp"/>
+   <addaction name="menuFile"/>
+   <addaction name="menuView"/>
+   <addaction name="menuCalculate"/>
+   <addaction name="menuExport_2"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar_2">
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <property name="toolTip">
+    <string>View toolbar</string>
+   </property>
+   <property name="statusTip">
+    <string>View the data in different ways to see the habitat, flow, bottlenecks etc.</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionView_Map"/>
+   <addaction name="actionView_Voltage"/>
+   <addaction name="actionView_Power"/>
+   <addaction name="actionView_Population"/>
+   <addaction name="actionComparison_View"/>
+   <addaction name="actionDropping_View"/>
+   <addaction name="separator"/>
+   <addaction name="actionSmoothing"/>
+   <addaction name="actionToggle_Navbar"/>
+   <addaction name="actionToggle_Sidebar"/>
+   <addaction name="actionToggle_Subplots"/>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_3">
+   <property name="windowTitle">
+    <string>toolBar_3</string>
+   </property>
+   <property name="toolTip">
+    <string>Analysis toolbar</string>
+   </property>
+   <property name="statusTip">
+    <string>Tools to run calculations on the landscape data.</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+   <addaction name="actionConductance"/>
+   <addaction name="actionCalc_Power"/>
+   <addaction name="actionCalculate_Metrics"/>
+   <addaction name="actionForward_Optimise"/>
+   <addaction name="actionBackwards_Improvement"/>
+   <addaction name="actionDropping_Filter"/>
+  </widget>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="windowTitle">
+    <string>Scenarios and Information/Parameters Panel</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Scenario List</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="listWidget">
+       <property name="toolTip">
+        <string>Scenario List</string>
+       </property>
+       <property name="statusTip">
+        <string>Each scenario consists of a map of habitat, source / sink and kernel parameters. You can select between scenarios here.</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="statusTip">
+        <string>Information and parameters panel. Displays map layer parameters and solution and used to input kernel and plot parameters.</string>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tab_3">
+        <attribute name="title">
+         <string>Map</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="6" column="0">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>E/W Cell Size</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>N/S Cell Size</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QDoubleSpinBox" name="originYSpinBox">
+           <property name="statusTip">
+            <string>North / South origin of the coordinate system, taken from the GIS layer metadata.</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="decimals">
+            <number>4</number>
+           </property>
+           <property name="minimum">
+            <double>-999999999.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>999999999.990000009536743</double>
+           </property>
+           <property name="value">
+            <double>0.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>Habitat Area</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_14">
+           <property name="text">
+            <string>Number of Cells</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QDoubleSpinBox" name="originXSpinBox">
+           <property name="statusTip">
+            <string>East / West origin of the coordinate system, taken from the GIS layer metadata.</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="decimals">
+            <number>4</number>
+           </property>
+           <property name="minimum">
+            <double>-999999999.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>999999999.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>0.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="hGridSizeSpinBox">
+           <property name="statusTip">
+            <string>The horizontal grid size of the current GIS habitat layer</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>999999999</number>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QDoubleSpinBox" name="cellSizeYSpinBox">
+           <property name="statusTip">
+            <string>The size of a cell in the North / South direction.</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="decimals">
+            <number>4</number>
+           </property>
+           <property name="minimum">
+            <double>-1000000000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>999999999.990000009536743</double>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>E/W Raster Size</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>N/S Raster Size</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_23">
+           <property name="text">
+            <string>Origin E/W</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="vGridSizeSpinBox">
+           <property name="statusTip">
+            <string>The vertical grid size of the current GIS habitat layer</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>999999999</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QDoubleSpinBox" name="habitatAreaSpinBox">
+           <property name="statusTip">
+            <string>The total area of the habitat in km squared.</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <double>999999999.990000009536743</double>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Origin N/S</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="nCellsSpinBox">
+           <property name="statusTip">
+            <string>Displays the number of cells in the landscape that contain some habitat.</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="maximum">
+            <number>999999999</number>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QDoubleSpinBox" name="cellSizeXSpinBox">
+           <property name="statusTip">
+            <string>The size of a cell in the East / West direction. </string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="decimals">
+            <number>4</number>
+           </property>
+           <property name="minimum">
+            <double>-999999999.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>999999999.990000009536743</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab">
+        <attribute name="title">
+         <string>Parameters</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="1" column="0">
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>Kernel</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="2">
+             <widget class="QDoubleSpinBox" name="dispersalSpinBox">
+              <property name="statusTip">
+               <string>The species dispersal parameter in km.</string>
+              </property>
+              <property name="suffix">
+               <string> km</string>
+              </property>
+              <property name="decimals">
+               <number>9</number>
+              </property>
+              <property name="maximum">
+               <double>999999999.999999046325684</double>
+              </property>
+              <property name="value">
+               <double>4.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Dispersal</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QDoubleSpinBox" name="rSpinBox">
+              <property name="statusTip">
+               <string>Rate of reproduction</string>
+              </property>
+              <property name="maximum">
+               <double>1000000000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>100.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>R            </string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="title">
+            <string>Power Plots</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="cumPowerSpinBox">
+              <property name="statusTip">
+               <string>The bottlenecks threshold controls the number of bottlenecks drawn on the map. Reducing the threshold has the effect of drawing more bottlenecks</string>
+              </property>
+              <property name="decimals">
+               <number>4</number>
+              </property>
+              <property name="maximum">
+               <double>100.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>99.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="cumGoButton">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Go</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Bottlenecks Thresh</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_2">
+        <attribute name="title">
+         <string>Solution</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Resistance To Extinction</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Total Link Strength</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Time</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Speed</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEdit_1">
+           <property name="minimumSize">
+            <size>
+             <width>70</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineEdit_2">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="statusTip">
+            <string>The number of steps needed to colonise the target.</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="lineEdit_4">
+           <property name="statusTip">
+            <string>The combined strength of all the links in the landscape.</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineEdit_3">
+           <property name="statusTip">
+            <string/>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidget_2">
+   <property name="minimumSize">
+    <size>
+     <width>150</width>
+     <height>120</height>
+    </size>
+   </property>
+   <property name="statusTip">
+    <string>Subplot panel. Click on an individual map or plot to bring it in to the main map area.</string>
+   </property>
+   <property name="windowTitle">
+    <string>Subplots</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="MplSubWidget" name="subfig1" native="true">
+       <property name="statusTip">
+        <string>Subplot 1. Click the map to move it to the main plot window.</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="MplSubWidget" name="subfig2" native="true">
+       <property name="statusTip">
+        <string>Subplot 2. Click the map to move it to the main plot window.</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="MplSubWidget" name="subfig3" native="true">
+       <property name="statusTip">
+        <string>Subplot 3. Click the map to move it to the main plot window.</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="MplSubWidget" name="subfig4" native="true">
+       <property name="statusTip">
+        <string>Subplot 4. Click the map to move it to the main plot window.</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="toolTip">
+    <string>Project toolbar</string>
+   </property>
+   <property name="statusTip">
+    <string>Project toolbar</string>
+   </property>
+   <property name="whatsThis">
+    <string/>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="actionOpen"/>
+   <addaction name="actionClose"/>
+   <addaction name="separator"/>
+   <addaction name="actionOpen_Habitat"/>
+   <addaction name="actionAdd_Source_Sink"/>
+   <addaction name="separator"/>
+   <addaction name="actionDuplicate_Scenario"/>
+   <addaction name="actionDelete_From_Scenarios"/>
+   <addaction name="actionRename_Scenario"/>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_4">
+   <property name="windowTitle">
+    <string>toolBar_4</string>
+   </property>
+   <property name="toolTip">
+    <string>Help toolbar</string>
+   </property>
+   <property name="statusTip">
+    <string>Open or close the Econet manual.</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionWhats_This"/>
+   <addaction name="actionManual"/>
+   <addaction name="actionSettings"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_5">
+   <property name="windowTitle">
+    <string>toolBar_5</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionPoint"/>
+  </widget>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Document.png</normaloff>
+     <normalon>../../tables14/econet/icons/Document.png</normalon>:/icons/Document.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Project</string>
+   </property>
+   <property name="statusTip">
+    <string>Start a new project. </string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/open-file-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/open-file-icon.png</normalon>:/icons/open-file-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open Project</string>
+   </property>
+   <property name="statusTip">
+    <string>Open a project. This must be an HDF5 file with a '.h5' extension.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Save-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/Export To Document.png</normalon>:/icons/Save-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save Project</string>
+   </property>
+   <property name="statusTip">
+    <string>Write any unsaved data to the project file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSave_As">
+   <property name="text">
+    <string>Save As</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Printer-icon.png</normaloff>:/icons/Printer-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionSave_Image">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Images-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/Images-icon.png</normalon>:/icons/Images-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Image</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/delete-file-icon.png</normaloff>:/icons/delete-file-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Close Project</string>
+   </property>
+   <property name="toolTip">
+    <string>Close Project</string>
+   </property>
+   <property name="statusTip">
+    <string>Close the current project</string>
+   </property>
+  </action>
+  <action name="actionView_Map">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/orbz-nature-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/orbz-nature-icon.png</normalon>:/icons/orbz-nature-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Habitat View</string>
+   </property>
+   <property name="statusTip">
+    <string>View the habitat layer and source and sink.</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+H</string>
+   </property>
+  </action>
+  <action name="actionView_Voltage">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Battery-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/Battery-icon.png</normalon>:/icons/Battery-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Flow View</string>
+   </property>
+   <property name="toolTip">
+    <string>Flow View</string>
+   </property>
+   <property name="statusTip">
+    <string>View the landscape flow and progress</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+V</string>
+   </property>
+  </action>
+  <action name="actionView_Power">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/battery-power-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/Battery-icon2.png</normalon>:/icons/battery-power-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bottlenecks View</string>
+   </property>
+   <property name="toolTip">
+    <string>Bottlenecks View</string>
+   </property>
+   <property name="statusTip">
+    <string>View  the landscape bottlenecks</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+P</string>
+   </property>
+  </action>
+  <action name="actionConductance">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Industry-Resistor-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/Network-icon.png</normalon>:/icons/Industry-Resistor-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Calculate Speed</string>
+   </property>
+   <property name="toolTip">
+    <string>Calculate Speed and Flow</string>
+   </property>
+   <property name="statusTip">
+    <string>Calculate the landscape speed and flow. You must have a habitat and source and sink defined.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
+   </property>
+  </action>
+  <action name="actionForward_Optimise">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Button-Next-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/Button-Next-icon.png</normalon>:/icons/Button-Next-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Forward Optimise</string>
+   </property>
+   <property name="statusTip">
+    <string>Forward optimisation. Not implemented yet.</string>
+   </property>
+  </action>
+  <action name="actionBackwards_Improvement">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Button-Previous-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/Button-Previous-icon.png</normalon>:/icons/Button-Previous-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Backwards Optimise</string>
+   </property>
+   <property name="statusTip">
+    <string>Backward optimisation. Optimise a new layer by dropping cells.</string>
+   </property>
+  </action>
+  <action name="actionViability">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/graph-icon.png</normaloff>
+     <normalon>../../tables14/econet/icons/graph-icon.png</normalon>:/icons/graph-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Viability</string>
+   </property>
+  </action>
+  <action name="actionShow_subplots">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show subplots</string>
+   </property>
+  </action>
+  <action name="actionShow_history_and_controls">
+   <property name="text">
+    <string>Show history and controls</string>
+   </property>
+  </action>
+  <action name="actionOpen_Habitat">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/System-Map-icon.png</normaloff>:/icons/System-Map-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open Habitat</string>
+   </property>
+   <property name="statusTip">
+    <string>Load a new habitat. This must be a valid GIS raster layer. A new scenario will be created.</string>
+   </property>
+  </action>
+  <action name="actionShow_Plot_navigation_bar">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Zoom-In-icon.png</normaloff>:/icons/Zoom-In-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Nav Bar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl++</string>
+   </property>
+  </action>
+  <action name="actionHide_plot_navigation_bar">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Zoom-Out-icon.png</normaloff>:/icons/Zoom-Out-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hide Nav Bar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
+   </property>
+  </action>
+  <action name="actionDuplicate_Scenario">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/copy-icon.png</normaloff>:/icons/copy-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Duplicate Scenario</string>
+   </property>
+   <property name="statusTip">
+    <string>Duplicate the current scenario. This may take some time if the scenario is large</string>
+   </property>
+  </action>
+  <action name="actionDelete_From_Scenarios">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Folder-Delete-icon.png</normaloff>:/icons/Folder-Delete-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete Scenario</string>
+   </property>
+   <property name="statusTip">
+    <string>Delete the current scenario from the project. Note: The last scenario cannot be deleted. </string>
+   </property>
+  </action>
+  <action name="actionAdd_Source_Sink">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Filesystem-pipe-tap-icon.png</normaloff>:/icons/Filesystem-pipe-tap-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Source / Target</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Source / Target</string>
+   </property>
+   <property name="statusTip">
+    <string>Add source and sink, either from files or generate automatically.</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Source and Sink Dialog&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The Econet software requires source and sink habitat patches to be defined. The source patch is a habitat area already populated by the species of interest and the sink is the target patch that we are aiming to populate. In circuit theory we define the source as having a Voltage of 1 and the sink with a Voltage of 0. There are two methods of defining the source and sink. They can be either loaded from GIS files as a raster image or generated automatically by the software in either Noth/South or East/West directions.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Generating the Source and Sink Automatically&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Select the 'Auto' tab in the 'Assign Source Sink' dialog box, which should be desplayed like the image below. Choose the direction using the radiobuttins on the left. The width of the habitat generated can also be selected. The width is in pixels (habitat cells), so it is determined by the resolution of your habitat raster. The 'Expand Area' option determines whether the new habitat will be placed within the bounds of the original raster (at the edges) or if the habitat area is to be expanded.&lt;br/&gt;&lt;br/&gt;&lt;img src=&quot;:/Images/ssinkauto.tiff&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Generating the Source and Sink From Files&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;To import the source and sink from a GIS raster file, select the 'From File' tab and use the 'Find' button to locate your raster file. A standard file open box will open so that you can find your file. The raster file must contain cells with the source and sink having specific values. By default these are '1' for source and '2' for sink, but these default values can be changed with the spin boxes.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/Images/ssinkfiles.tiff&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionComparison_View">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/graph-icon.png</normaloff>:/icons/graph-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Comparison View</string>
+   </property>
+   <property name="toolTip">
+    <string>Comparison View</string>
+   </property>
+   <property name="statusTip">
+    <string>View plots that combine the results from all the scenarios.</string>
+   </property>
+  </action>
+  <action name="actionCalculate_All">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/calc_all.png</normaloff>:/icons/calc_all.png</iconset>
+   </property>
+   <property name="text">
+    <string>Calculate All</string>
+   </property>
+  </action>
+  <action name="actionView_Population">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/rubberring.png</normaloff>:/icons/rubberring.png</iconset>
+   </property>
+   <property name="text">
+    <string>Population View</string>
+   </property>
+   <property name="statusTip">
+    <string>View the landscape in terms of metapopulation statistics.</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+O</string>
+   </property>
+  </action>
+  <action name="actionCalculate_Metrics">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/redcross.png</normaloff>:/icons/redcross.png</iconset>
+   </property>
+   <property name="text">
+    <string>Calculate Survival</string>
+   </property>
+   <property name="statusTip">
+    <string>Calculate the landscape metapopulation 'survival' data</string>
+   </property>
+  </action>
+  <action name="actionScenario_Data">
+   <property name="text">
+    <string>Scenario Data</string>
+   </property>
+  </action>
+  <action name="actionProject_Data">
+   <property name="text">
+    <string>Project Data</string>
+   </property>
+  </action>
+  <action name="actionCurrent_Map">
+   <property name="text">
+    <string>Added Habitat</string>
+   </property>
+  </action>
+  <action name="actionToggle_Navbar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Tools-icon.png</normaloff>:/icons/Tools-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Toggle Navbar</string>
+   </property>
+   <property name="statusTip">
+    <string>Show the main map window toolbar. You can use this to zoom and pan the map.</string>
+   </property>
+  </action>
+  <action name="actionToggle_Subplots">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Actions-office-chart-line-stacked-icon.png</normaloff>:/icons/Actions-office-chart-line-stacked-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Toggle Subplots</string>
+   </property>
+   <property name="statusTip">
+    <string>Toggle to show or hide the subplots panel</string>
+   </property>
+  </action>
+  <action name="actionToggle_Sidebar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Actions-view-list-tree-icon.png</normaloff>:/icons/Actions-view-list-tree-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Toggle Sidebar</string>
+   </property>
+   <property name="statusTip">
+    <string>Toggle to show or hide the scenario list and information panel.</string>
+   </property>
+  </action>
+  <action name="actionSmoothing">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/terraindc.png</normaloff>:/icons/terraindc.png</iconset>
+   </property>
+   <property name="text">
+    <string>Smoothing</string>
+   </property>
+   <property name="statusTip">
+    <string>Toggle map smoothing on and off. Smoothing can make the image look less blocky.</string>
+   </property>
+  </action>
+  <action name="actionDropped_Habitat">
+   <property name="text">
+    <string>Dropped Habitat</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionEconets_Help">
+   <property name="text">
+    <string>Econets Help</string>
+   </property>
+  </action>
+  <action name="actionCurrent_Tasnk_Help">
+   <property name="text">
+    <string>Current Task Help</string>
+   </property>
+  </action>
+  <action name="actionWhats_This">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Button-Help-icon.png</normaloff>:/icons/Button-Help-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>What's This?</string>
+   </property>
+   <property name="statusTip">
+    <string>Enter 'What's This' mode. The mouse pointer will change and you will be able to click on any control to obtain help on that control.</string>
+   </property>
+  </action>
+  <action name="actionHelp_Browser">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/book-icon.png</normaloff>:/icons/book-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Manu</string>
+   </property>
+  </action>
+  <action name="actionManual">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/book-icon.png</normaloff>:/icons/book-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Manual</string>
+   </property>
+   <property name="statusTip">
+    <string>Open the manual for the software</string>
+   </property>
+  </action>
+  <action name="actionRename_Scenario">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Folder-Open-icon.png</normaloff>:/icons/Folder-Open-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rename Scenario</string>
+   </property>
+   <property name="statusTip">
+    <string>Rename the current scenario. Econets will ask you for a new name.</string>
+   </property>
+  </action>
+  <action name="actionVoltage_Map">
+   <property name="text">
+    <string>Progress Map</string>
+   </property>
+   <property name="statusTip">
+    <string>Export the progress map as a GIS layer</string>
+   </property>
+  </action>
+  <action name="actionVoltage_Layers_Map">
+   <property name="text">
+    <string>Isolated Areas Map</string>
+   </property>
+   <property name="statusTip">
+    <string>Export the isolated areas map as a GIS layer</string>
+   </property>
+  </action>
+  <action name="actionCurrent_Map_2">
+   <property name="text">
+    <string>Current Map</string>
+   </property>
+  </action>
+  <action name="actionFlow_Map">
+   <property name="text">
+    <string>Flow Map</string>
+   </property>
+   <property name="statusTip">
+    <string>Export the flow map as a GIS layer</string>
+   </property>
+  </action>
+  <action name="actionCalc_Power">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/uknarrow.png</normaloff>:/icons/uknarrow.png</iconset>
+   </property>
+   <property name="text">
+    <string>Calculate Bottlenecks</string>
+   </property>
+   <property name="statusTip">
+    <string>Calculate the bottlenecks in the landscape to see where new habitat should be created</string>
+   </property>
+  </action>
+  <action name="actionDropping_Filter">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Actions-view-filter-icon.png</normaloff>:/icons/Actions-view-filter-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Dropping Filter</string>
+   </property>
+   <property name="statusTip">
+    <string>Open a new window to filter the results of the dropping algorithm in order if their contribution to flow.</string>
+   </property>
+  </action>
+  <action name="actionDropping_View">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/drop-icon.png</normaloff>:/icons/drop-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Dropping View</string>
+   </property>
+   <property name="statusTip">
+    <string>Show the results of the dropping algorithm</string>
+   </property>
+  </action>
+  <action name="actionDropped_Habitat_2">
+   <property name="text">
+    <string>Dropping Filtered Habitat Map</string>
+   </property>
+   <property name="toolTip">
+    <string>Export Dropped Habitat</string>
+   </property>
+   <property name="statusTip">
+    <string>Export the filtered results of the dropping algorithm as a GIS mask.</string>
+   </property>
+  </action>
+  <action name="actionDropping_Map">
+   <property name="text">
+    <string>Dropping Rank Map</string>
+   </property>
+   <property name="statusTip">
+    <string>Export a GIS layer containing new habitat ranked by the dropping algorithm</string>
+   </property>
+  </action>
+  <action name="actionClose_2">
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionClose_App">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Actions-process-stop-icon.png</normaloff>:/icons/Actions-process-stop-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Close App</string>
+   </property>
+   <property name="statusTip">
+    <string>Close econets</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/Developer-icon.png</normaloff>:/icons/Developer-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Settings</string>
+   </property>
+   <property name="statusTip">
+    <string>Alter the software settings</string>
+   </property>
+  </action>
+  <action name="actionSource_Map">
+   <property name="text">
+    <string>Source Map</string>
+   </property>
+   <property name="statusTip">
+    <string>Export the source mask as a GIS layer</string>
+   </property>
+  </action>
+  <action name="actionSink_Map">
+   <property name="text">
+    <string>Target Map</string>
+   </property>
+   <property name="statusTip">
+    <string>Export the target mask as a GIS layer</string>
+   </property>
+  </action>
+  <action name="actionDropping_Data">
+   <property name="text">
+    <string>Dropping Data</string>
+   </property>
+   <property name="statusTip">
+    <string>Export the results of the dropping algorithm as a text file.</string>
+   </property>
+  </action>
+  <action name="actionPoint">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="econet.qrc">
+     <normaloff>:/icons/point-icon.png</normaloff>:/icons/point-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Point</string>
+   </property>
+   <property name="statusTip">
+    <string>Edit points on the habitat map.</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MplWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">mplwidget</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MplSubWidget</class>
+   <extends>QWidget</extends>
+   <header>mplwidget</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="econet.qrc"/>
+ </resources>
+ <connections/>
+</ui>
