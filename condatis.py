@@ -2,15 +2,6 @@
 
 """ """
 
-__author__ = "David Wallis"
-__copyright__ = "Copyright 2015, D.W Wallis and J.A Hodgson"
-__credits__ = ["Aidan Lonergan", "Andrew Suggitt", "Atte Moilanen", "Chloe Bellamy", "Duncan Blake", "Geoffrey Heard", "James Latham", "Jamie Robins", "Jonathan Rothwell", "Jonathan Winn", "Kevin Watts", "Nicholas Macgregor", "Nik Bruce", "Paul Evans", "Phil Baarda", "Sarah Scriven", "Sarah Taylor", "Sheila George", "Steve Palmer", "Tim Graham", "Tom Squires", "Vicky Kindemba", "The authors also acknowledge funding from the UK Natural Environment Research Council grant number NE/L002787/1."]
-__license__ = "GPL"
-__version__ = "0.6.0"
-__maintainer__ = "D.W. Wallis"
-__email__ = "d.wallis@liv.ac.uk"
-__status__ = "Development"
-
 import copy
 import cPickle as pickle
 from mplwidget import MplWidget
@@ -53,12 +44,23 @@ import addinggui
 import registergui
 import aboutgui
 import manualgui
+import version
+
+__author__ = "David Wallis"
+__copyright__ = "Copyright 2015, D.W Wallis and J.A Hodgson"
+__credits__ = ["Aidan Lonergan", "Andrew Suggitt", "Atte Moilanen", "Chloe Bellamy", "Duncan Blake", "Geoffrey Heard", "James Latham", "Jamie Robins", "Jonathan Rothwell", "Jonathan Winn", "Kevin Watts", "Nicholas Macgregor", "Nik Bruce", "Paul Evans", "Phil Baarda", "Sarah Scriven", "Sarah Taylor", "Sheila George", "Steve Palmer", "Tim Graham", "Tom Squires", "Vicky Kindemba", "The authors also acknowledge funding from the UK Natural Environment Research Council grant number NE/L002787/1."]
+__license__ = "GPL"
+__version__ = version.version
+__maintainer__ = "D.W. Wallis"
+__email__ = "d.wallis@liv.ac.uk"
+__status__ = "Development"
+
 
 #REVISION="$Rev: 18 $"
-REVISION="$Rev: 18 $"
-sp=string.split(REVISION)
+#REVISION="$Rev: 18 $"
+#sp=string.split(REVISION)
 
-VERSION="0.4."+sp[1]
+VERSION=__version__
 
 def makeIfNot(dir):
     if not os.path.exists(dir):

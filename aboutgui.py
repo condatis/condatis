@@ -7,10 +7,11 @@ import matplotlib
 import osgeo
 import tables
 from PIL import Image
+import version
 
-REVISION="$Rev: 18 $"
-sp=string.split(REVISION)
-VERSION="0.4."+sp[1]
+#REVISION="$Rev: 18 $"
+#sp=string.split(REVISION)
+VERSION=version.version
 
 aboutHtml = """
 <html>
