@@ -1,3 +1,6 @@
+from PyQt4 import QtCore, QtGui
+import manualui
+
 class ManualDialog(QtGui.QDialog,manualui.Ui_ManualDialog):
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self,parent)

@@ -61,9 +61,7 @@ sp=string.split(REVISION)
 VERSION="0.4."+sp[1]
 
 def makeIfNot(dir):
-    print "makeNotIf:",dir
     if not os.path.exists(dir):
-        print "Path doesn't exist, attempting to create",dir
         os.makedirs(str(dir))
 
 def excepthook(excType, excValue, tracebackobj):
