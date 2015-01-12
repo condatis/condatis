@@ -15,7 +15,6 @@ class Settings():
         self.scalebarlength=10
         self.path=os.path.expanduser('~')+'/condatis'
         self.manpath='doc/manual'
-        self.path=''
         # self.projectpath='/projects'
         # self.exports='/exports'
         self.cmaps = sorted(m for m in plt.cm.datad if not m.endswith("_r"))
