@@ -21,6 +21,7 @@ class Settings():
         self.cmaps = sorted(m for m in plt.cm.datad if not m.endswith("_r"))
         self.registered=False
 
+        
     def exportspath(self):
         return self.path+'exports'
 

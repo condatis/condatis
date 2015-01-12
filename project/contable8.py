@@ -731,6 +731,15 @@ def solve(h5,sc):
         sc.edgePower.remove()
     gc.collect()
 
+
+def topNinds_(full,N=10):
+    # Get the indices for the largest `num_largest` values.
+    num_largest = N
+    indices = (-full).argpartition(num_largest, axis=None)[:num_largest]
+    xl, yl = np.unravel_index(indices, full.shape)
+    return xl,yl
+
+
 def calcPower(h5,sc):
     if sc.__contains__("edgePower"):
         sc.edgePower.remove()
@@ -755,22 +764,71 @@ def calcPower(h5,sc):
     # sep=sparse.csr_matrix(fep)
     
     logging.info("Doing total power")
-    pp=sc.edgePower.read()
+    pp1=sc.edgePower.read()
+    pp=np.triu(pp1)
     logging.info("Calculating total edge power")
     sc._v_attrs.totalEdgePower=np.sum(pp)
     logging.info("Calculating max edge power")
     sc._v_attrs.maxEdgePower=np.max(pp)
     sc._v_attrs.edgePowerShape=pp.shape
+    h5.flush()
 
     logging.info("Calculating significant edge power")
     maxep=sc._v_attrs.maxEdgePower    
-    pps=np.sort(pp[pp>maxep/100000.0].flatten())
-#    print "pps",pps
-    logging.debug("max(pps): %f",np.max(pps))
-#    print "size of pps", pps.shape
-    if sc.__contains__('sig_power'):
-        sc.sig_power.remove()
-    h5.createArray(sc,'sig_power',pps)
+#    pps=np.sort(pp[pp>maxep/100000.0].flatten())
+    # This is where I need to put the code to extract
+    # the x,y,ap for the significant power.
+
+    x=sc.x.read()
+    y=sc.y.read()
+    ap=sc.ap.read()
+    w=np.where(pp>maxep/100000.0)
+    pps=np.sort(pp[w].flatten())
+    wx1=x[w[0]]
+    wx2=x[w[1]]
+    wy1=y[w[0]]
+    wy2=y[w[1]]
+    wp=pp[w[0],w[1]]
+
+    tn=topNinds_(pp,1000)
+    xl=tn[0]
+    yl=tn[1]
+    wx1=x[xl]
+    wy1=y[xl]
+    wx2=x[yl]
+    wy2=y[yl]
+    wp=pp[tn]
+
+    print wx1[0:10]
+    print wx2[0:10]
+    print wy1[0:10]
+    print wy2[0:10]
+
+    if sc.__contains__('sig_pow'):
+        sc.sig_pow.remove()
+    h5.createArray(sc,'sig_pow',wp)
+
+    if sc.__contains__('sorted_sig_power'):
+        sc.sorted_sig_power.remove()
+    h5.createArray(sc,'sorted_sig_power',pps)
+
+    if sc.__contains__('sigx1'):
+        sc.sigx1.remove()
+    h5.createArray(sc,'sigx1',wx1)
+
+    if sc.__contains__('sigx2'):
+        sc.sigx2.remove()
+    h5.createArray(sc,'sigx2',wx2)
+
+    if sc.__contains__('sigy1'):
+        sc.sigy1.remove()
+    h5.createArray(sc,'sigy1',wy1)
+
+    if sc.__contains__('sigy2'):
+        sc.sigy2.remove()
+    h5.createArray(sc,'sigy2',wy2)
+
+    h5.flush()
 
     # NS=pp.size
     # NN=1000
@@ -780,7 +838,7 @@ def calcPower(h5,sc):
     #     sc.step_power.remove()
     # h5.createArray(sc,'step_power',spp)
 
-    h5.flush()
+
     
 def solve_(h5,sc):
     M0=dwwsp.diag(sc.ipv_in.read() + sc.ipv_out.read() + sc.ipv_free.read().sum(axis=0)) \
@@ -817,7 +875,25 @@ def solve_(h5,sc):
     h5.createArray(sc,'I2ij',I2ij)
     h5.flush()
 
+
 def getNth(h5,N):
+    i=0
+    for sc in h5.root.scenarios:
+        if i==N:
+            return sc
+        i+=1
+    logging.debug("Whoops. We didn't find the scenario.")
+    return False
+
+def getNth_orig2(h5,N):
+    for i in h5.root.scenarios:
+        print "i is:",i
+        print "in is:",i._v_attrs.ind
+        if i._v_attrs.ind==N:
+            return i
+    return False
+
+def getNth_orig(h5,N):
     for i in h5.root.scenarios:
         if i._v_attrs.ind==N:
             return i

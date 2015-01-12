@@ -9,7 +9,7 @@ import project.vlevels as vlevels
 from PIL import Image
 from PIL import ImageDraw
 import calculatingui
-import calcdialog
+import calcdialog  
 import gc
 import scipy.sparse
 import tables
@@ -810,7 +810,7 @@ def showVoltageLayersForPower(can,project,alpha=.1):
     can.fig.colorbar(im)
     can.draw()
 
-def showBackgroundForPower(can,project,alpha=.1):
+def showBackgroundForPower(can,project,alpha=.5):
     global cols
     V0=project.nodeVoltage()
     x,y=project.habitat()
@@ -851,6 +851,30 @@ def renderEdges(project,x,y,M,XZ,YZ,N=100):
 
     return img
 
+def renderPower(project,N):
+    XZ,YZ=project.rasterSize()
+    img = Image.new('F',(XZ,YZ),0.0)
+    draw = ImageDraw.Draw(img)
+
+    sc=project.scenario
+    sigx1=sc.sigx1.read()
+    sigy1=sc.sigy1.read()
+    sigx2=sc.sigx2.read()
+    sigy2=sc.sigy2.read()
+    sigep=sc.sig_pow.read()
+    asep=np.argsort(sigep)[::-1]
+
+    x1=sigx1[asep]
+    y1=sigy1[asep]
+    x2=sigx2[asep]
+    y2=sigy2[asep]
+    ep=sigep[asep]
+
+    for ii in range(N)[::-1]:
+        color=ep[ii]
+        draw.line(((x1[ii],y1[ii]),(x2[ii],y2[ii])), fill=color, width=1)
+    return img
+
 def cooreshape(a, shape):
     """Reshape the sparse matrix `a`.
 
@@ -872,6 +896,31 @@ def cooreshape(a, shape):
 
     b = scipy.sparse.coo_matrix((c.data, (new_row, new_col)), shape=shape)
     return b
+
+def showSigEdgePower(can,project):
+    initfig(can)
+    if project.powerCalculated():
+        sc=project.scenario
+
+        spu=project.scenario.sig_pow.read()
+        sp=np.sort(spu)
+        csp=np.cumsum(sp)
+#        print "sp",sp
+#        print "csp",csp
+        maxcsp=np.max(csp)
+        yt=maxcsp-csp
+        thresh=project.cumPowerThreshold/100.0 * maxcsp
+        w=np.where(yt<thresh)[0]
+        N=w.size
+        logging.info("Drawing  %i lines on power map" % N)
+
+        rend=renderPower(project,N)
+        pl=np.asarray(rend)
+        im=myIM(can, np.transpose(pl),cmap=settings.appsettings.getpowercm())
+        can.fig.colorbar(im)
+        showBackgroundForPower(can,project)
+        fullzoom(can,project)
+        can.draw()
 
 def showEdgePower(can,project,N=100,alpha=.3):
     initfig(can)
@@ -1075,7 +1124,7 @@ def showCumSumLog_(can,project):
     can.draw()
 
 
-def showCumSum(can,project):
+def showCumSum_whatsthis(can,project):
     initfig(can,ticksOff=False)
     if project.powerCalculated():
         sc=project.scenario
@@ -1085,6 +1134,11 @@ def showCumSum(can,project):
         sigsize=sigshape[0]
         ppsize=ppshape[0]*ppshape[1]
         prop=sigshape[0]*1.0/ppsize
+        print "orig prop",prop
+        # new
+        prop=sigsize*1.0/ppsize
+        print "new prop", prop
+        # end new
         logging.debug("percent: %d", prop*100)
         logging.debug("1-pc: %f",(1.0-prop)*100)
         L=np.arange(sigsize)*1.0/sigsize*100
@@ -1177,10 +1231,143 @@ def showCumSumLog(can,project):
     can.fig.subplots_adjust(bottom=.1,top=topgap,left=.15,right=rightgap)
     can.draw()
 
+
+
 def showCumSum(can,project):
     initfig(can)
     if project.powerCalculated():
         initfig(can,ticksOff=False)
+        sc=project.scenario
+        ppshape=sc._v_attrs.edgePowerShape
+        sp=project.sigPower()
+        sigshape=sp.shape
+        sigsize=sigshape[0]
+        ppsize=ppshape[0]*ppshape[1]
+        beta=sigshape[0]*1.0/ppsize
+        alpha=1-beta
+        L=np.arange(sigsize+0.0)/sigsize
+
+        xd=L*beta + alpha
+        x=xd*100
+        pp_cum=np.cumsum(sp)
+        frc=project.cumPowerThreshold/100.0
+#        ppw=np.where(pp_cum>np.max(pp_cum)/frc)[0]
+        N=sp.size*1.0
+
+        # Plot cumulative power
+        x=np.arange(pp_cum.size)
+        x=-x
+        x-=x[-1]
+        y=np.max(pp_cum)-pp_cum
+        can.ax.plot(x,y,'r.')
+
+        # Plot threshold
+        thresh=project.cumPowerThreshold/100.0
+        thr=thresh*max(y)
+        ythr=y*0+thr
+        can.ax.plot(x,ythr)
+
+        # Labels and axes
+        can.ax.set_title("Cummulative Sum of Power")  
+        can.ax.set_ylabel("Cummulative Sum Power")
+        can.ax.set_xlabel("Link number")
+        imin=int(np.min(x))
+        x1,x2,y1,y2=can.ax.axis()
+        x2=1000
+        can.ax.axis((x1,x2,y1,y2))
+        can.fig.subplots_adjust(bottom=.1,top=topgap,left=.15,right=rightgap)
+        can.draw()
+
+def showCumSumPC(can,project):
+    initfig(can)
+    if project.powerCalculated():
+        initfig(can,ticksOff=False)
+        sc=project.scenario
+        ppshape=sc._v_attrs.edgePowerShape
+        sp=project.sigPower()
+        sigshape=sp.shape
+        sigsize=sigshape[0]
+        ppsize=ppshape[0]*ppshape[1]
+        beta=sigshape[0]*1.0/ppsize
+        alpha=1-beta
+        L=np.arange(sigsize+0.0)/sigsize
+
+        xd=L*beta + alpha
+        x=xd*100
+        pp_cum=np.cumsum(sp)
+        frc=project.cumPowerThreshold/100.0
+#        ppw=np.where(pp_cum>np.max(pp_cum)/frc)[0]
+        N=sp.size*1.0
+
+        # Plot cumulative power
+        x=np.arange(pp_cum.size)
+        x=-x
+        x-=x[-1]
+        y=np.max(pp_cum)-pp_cum
+        maxy=np.max(y[-120:])
+        can.ax.plot(x,y/maxy*100,'r.')
+
+        # Plot threshold
+        thresh=project.cumPowerThreshold/100.0
+        thr=thresh*max(y)
+        ythr=y*0+thr
+        can.ax.plot(x,ythr/maxy*100)
+
+        # Labels and axes
+        can.ax.set_title("Percentage Cummulative Sum of Power")  
+        can.ax.set_ylabel("Percentage Cummulative Sum Power")
+        can.ax.set_xlabel("Link number")
+        imin=int(np.min(x))
+        x1,x2,y1,y2=can.ax.axis()
+        x2=1000
+        can.ax.axis((x1,x2,y1,y2))
+        can.fig.subplots_adjust(bottom=.1,top=topgap,left=.15,right=rightgap)
+        can.draw()
+
+def showCumSum__(can,project):
+    initfig(can)
+    print "showCumSum()"
+    if project.powerCalculated():
+        print "Inside cumsum"
+        initfig(can,ticksOff=False)
+        sc=project.scenario
+        ppshape=sc._v_attrs.edgePowerShape
+        sp=project.sigPower()
+        sigshape=sp.shape
+        sigsize=sigshape[0]
+        ppsize=ppshape[0]*ppshape[1]
+        beta=sigshape[0]*1.0/ppsize
+        alpha=1-beta
+        L=np.arange(sigsize+0.0)/sigsize
+
+        L=sp/np.max(sp)
+        
+        xd=L*beta + alpha
+        x=xd*100
+        pp_cum=np.cumsum(sp)
+        frc=project.cumPowerThreshold/100.0
+#        ppw=np.where(pp_cum>np.max(pp_cum)/frc)[0]
+        N=sp.size*1.0
+
+#        x=sp/np.max(sp)
+        
+        can.ax.plot(x,pp_cum)
+        
+        can.ax.set_title("Cummulative  Sum")  
+        can.ax.set_ylabel("Cummulative Sum Power")
+        can.ax.set_xlabel("Percentage Link power")
+        imin=int(np.min(x))
+        x1,x2,y1,y2=can.ax.axis()
+        x1=imin
+        can.ax.axis((x1,x2,y1,y2))
+        can.fig.subplots_adjust(bottom=.1,top=topgap,left=.15,right=rightgap)
+        can.draw()
+
+def showSigPower(can,project):
+    initfig(can)
+    if project.powerCalculated():
+        initfig(can,ticksOff=False)
+
         sc=project.scenario
         ppshape=sc._v_attrs.edgePowerShape
         sp=project.sigPower()
@@ -1197,18 +1384,18 @@ def showCumSum(can,project):
 #        ppw=np.where(pp_cum>np.max(pp_cum)/frc)[0]
         N=sp.size*1.0
 
-        can.ax.plot(x,pp_cum)
+#        can.ax.plot(np.arange(sigsize),sp/np.max(sp))
+        can.ax.plot(np.arange(sigsize),sp,'r.')
 
-        can.ax.set_title("Cummulative  Sum")  
-        can.ax.set_ylabel("Cummulative Sum Power")
-        can.ax.set_xlabel("Percentage of Power")
+        can.ax.set_title("Significant power")
+        can.ax.set_ylabel("Link Power")
+        can.ax.set_xlabel("Link number")
         imin=int(np.min(x))
         x1,x2,y1,y2=can.ax.axis()
-        x1=imin
+        x2=sigsize
         can.ax.axis((x1,x2,y1,y2))
         can.fig.subplots_adjust(bottom=.1,top=topgap,left=.15,right=rightgap)
         can.draw()
-
 
 ################ DROPPING ##################################
 def showDroppingHab(can,project):

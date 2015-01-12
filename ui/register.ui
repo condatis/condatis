@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>810</width>
-    <height>632</height>
+    <width>938</width>
+    <height>656</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,7 +39,7 @@
       <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Please take a moment to register Condatis. Use the web form on the right to send your details. You will be sent an email with a registration code. Type this in to the box below and press 'Regsiter'.</string>
+         <string>Please take a moment to register Condatis. Use the web form on the right to send your details. You will be sent an email with a registration code. Type this, and your email address,  in to the box below and press 'Regsiter'.</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignJustify|Qt::AlignVCenter</set>
@@ -84,29 +84,39 @@ We will send you one e-mail, a few months after you register, to askhow you're g
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit"/>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_2">
+         <item row="4" column="0">
+          <widget class="QPushButton" name="closeButton">
            <property name="text">
-            <string>Registration Code</string>
+            <string>Close</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Registration Code:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
           <widget class="QPushButton" name="registerButton">
            <property name="text">
             <string>Register</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="closeButton">
+         <item row="3" column="0" colspan="2">
+          <widget class="QLineEdit" name="lineEdit"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_5">
            <property name="text">
-            <string>Close</string>
+            <string>Email:</string>
            </property>
           </widget>
+         </item>
+         <item row="1" column="0" colspan="2">
+          <widget class="QLineEdit" name="emailEdit"/>
          </item>
         </layout>
        </widget>
@@ -115,10 +125,10 @@ We will send you one e-mail, a few months after you register, to askhow you're g
     </widget>
    </item>
    <item>
-    <widget class="QWebView" name="webView" native="true">
-     <property name="url" stdset="0">
+    <widget class="QWebView" name="webView">
+     <property name="url">
       <url>
-       <string>http://localhost/condatis/form.html</string>
+       <string>http://registration.condatis.org.uk/form.html</string>
       </url>
      </property>
     </widget>

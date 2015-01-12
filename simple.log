@@ -1,17 +1,17 @@
 --------------------------------------------------------------------------------
-2015-01-06, 15:20:32
+2015-01-12, 10:34:20
 --------------------------------------------------------------------------------
-<type 'exceptions.AttributeError'>: 
-Project instance has no attribute 'calcSplitLevels'
+<type 'exceptions.ValueError'>: 
+array larger than output file, or offset off edge
 --------------------------------------------------------------------------------
-  File "./condatis.py", line 1304, in calc
-    self.docalc()
-  File "./condatis.py", line 1289, in docalc
-    self.voltageView()
-  File "./condatis.py", line 1408, in voltageView
-    self.selectView(self.fVoltView,self.voltTips)
-  File "./condatis.py", line 1393, in selectView
-    self.fCurrentView[i](self.fig[i].canvas,self.project)
-  File "/Users/dww/Dropbox/git/clone/condatis/ecoplot.py", line 339, in showVoltageLayers
-    project.calcSplitLevels()
-0.4.18
+  File "/Users/dww/Dropbox/svnco/econet/condatis.py", line 836, in exportSourceMap
+    self.exportMap(a,"source")
+  File "/Users/dww/Dropbox/svnco/econet/condatis.py", line 826, in exportMap
+    f=exportgis.createGeoFile(op,driver,a,proj,dtype=dtype)
+  File "/Users/dww/Dropbox/svnco/econet/exportgis.py", line 97, in createGeoFile
+    DataSet.GetRasterBand(1).WriteArray(np.transpose(a).astype(np.float64))
+  File "/Users/dww/anaconda/lib/python2.7/site-packages/osgeo/gdal.py", line 1103, in WriteArray
+    return gdalnumeric.BandWriteArray( self, array, xoff, yoff )
+  File "/Users/dww/anaconda/lib/python2.7/site-packages/osgeo/gdal_array.py", line 256, in BandWriteArray
+    raise ValueError("array larger than output file, or offset off edge")
+0.3.85

@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import ecoplot
 import math
 import patterns
+import copy
+import numexpr as ne
 
 # The above function '2opNinds2' is probably a better approach
 # but without the triangular bit.
@@ -61,103 +63,84 @@ def flow(M0,cin,cout,cfree):
     return cond,I
 
 class AddingThread(QtCore.QThread):
-    def __init__(self,addingdlg):
+    def __init__(self,dlg):
         QtCore.QThread.__init__(self)
-        self.dlg=addingdlg
-
+        self.dlg=dlg
+        self.project=dlg.project
+#        self.dlg=addingdlg
+        self.flowarray=0
+        
     def run(self):
+        print "Running add"
         self.adding()
-        self.emit(QtCore.SIGNAL("finishedAdding()"))
-
-
+        print "Adding finished"
+#        self.emit(QtCore.SIGNAL("finishedAdding()"))
 
     def adding(self):
-        drdlg=self.dlg
-        x=drdlg.x
-        y=drdlg.y
-        ap=drdlg.ap
-        or_x,or_y,tg_x,tg_y=drdlg.or_x,drdlg.or_y,drdlg.tg_x,drdlg.tg_y
-        R,disp=drdlg.R,drdlg.disp
-        cell=drdlg.cell
-        xnew_=drdlg.xnew
-        ynew_=drdlg.ynew
-        apnew_=drdlg.apnew
-        ORIGZ=x.size
-        bignum=np.finfo('d').max        
-        xnew,ynew,apnew=removeDups(x,y,ap,xnew_,ynew_,apnew_)
-        drdlg.xnew=xnew
-        drdlg.ynew=ynew
-        drdlg.apnew=apnew
-#        cell=(scn._v_attrs.map_x_scale*1.0)/1000.0
+        print "In adding"
+        pr=self.project
+        scn=pr.scenario
+
+        print "Getting parameters"
+        # Get scenario parameters
+        x=scn.x.read()
+        y=scn.y.read()
+        ap=scn.ap.read()
+        or_x=scn.or_x.read()
+        or_y=scn.or_y.read()
+        tg_x=scn.tg_x.read()
+        tg_y=scn.tg_y.read()
+        R=scn._v_attrs.R
+        cell=scn._v_attrs.map_x_scale/1000.0
+        disp=scn._v_attrs.dispersal
+        ORIGZ=scn.x.shape[0]
+
+        print "copying"
+        # Make a copy of x,y,ap
+        copyx=np.zeros(x.size)
+        copyy=np.zeros(x.size)
+        copyap=np.zeros(x.size)
+        copyx[:]=x[:]
+        copyy[:]=y[:]
+        copyap[:]=ap[:]
         
+        print "makeing flow array"
+        # Array to hold the results
+        self.flowarray=np.zeros(copyx.size+1)
+
+        print "Calulating base flow"
+        # get flow for no added cell
+        print "Calculating M0"
+        M0,cin,cout,cfree=calcM0(copyx,copyy,copyap,or_x,or_y,tg_x,tg_y,R,disp,cell)
+        print "Calculating flow"
+        cond,fl=flow(M0,cin,cout,cfree)
+        print "cond is:",cond
+        print "setting flow"
+        self.flowarray[0]=cond
+
+        print "Drop parameters"
+        print "R:",R
+        print "Disp:",disp
+        print "Cell:",cell
+
         
-        N=xnew.size
-        #xnew,ynew,apnew=xnew_,ynew_,apnew_
-#        N=5
-        xc=np.concatenate((x,xnew))
-        yc=np.concatenate((y,ynew))
-        apc=np.concatenate((ap,apnew))
-        NEWZ=xc.shape[0]
+        print "Get new habitat"
+        xnew,ynew,apnew=self.dlg.getNewHab()
 
-        logging.debug("New size is: %d (%d duplicates removed)",xnew_.size,xnew_.size-xnew.size)
+        print "Original flow is ", cond
+        
+        print "starting loop"
+        for i in range(xnew.size):
+            print "In adding loop:",i
+            workingx=np.append(copyx,xnew[i])
+            workingy=np.append(copyy,ynew[i])
+            workingap=np.append(copyap,apnew[i])
 
-        if N > xnew.size:
-            logging.info("Limiting dropping to %d cells",xnew.size)
-            N = xnew.size
-            
-#        scn.progressBar.setValue(0)
-
-        M0,cin,cout,cfree=calcM0(xc,yc,apc,or_x,or_y,tg_x,tg_y,R,disp,cell)
-        inds=np.arange(cin.shape[0])
-        self.dlg.indlist=[]
-        self.dlg.flows=[]
-
-        self.stop=False
-        self.update=False
-#        N=5
-        for i in range(N):
-#            scn.progressBar.setValue(i/float(N-1)*100)
+            M0,cin,cout,cfree=calcM0(copyx,copyy,copyap,or_x,or_y,tg_x,tg_y,R,disp,cell)
             cond,fl=flow(M0,cin,cout,cfree)
-            tflow=np.sum(fl)
-            self.dlg.flows.append(cond)
-            logging.debug("Flow for %d is: %e",i,cond)
-            
-            # Find the index of the smallest contribution
-            fl[0:ORIGZ]=bignum
-            todrop=np.argmin(fl)
-
-            # Remove column and row from input arrays
-            ii=np.arange(M0.shape[0])
-            ii=np.delete(ii,todrop)
-            cfree=cfree[ii,ii[:,np.newaxis]]
-            cin=np.delete(cin,todrop)
-            cout=np.delete(cout,todrop)
-            M0=diag(cin + cout + cfree.sum(axis=0))-cfree
-            self.dlg.indlist.append(inds[todrop]-ORIGZ)
-            inds=np.delete(inds,todrop)
-            
-#            if i%self.updateSpinBox.value()==0:
-            if i%10==0:
-                self.emit(QtCore.SIGNAL("updateplots(PyQt_PyObject)"),i/float(N-1)*100)
-
-                #self.plotAllDrop()
-
-            if self.update:
-                self.update=False
-                self.emit(QtCore.SIGNAL("updateplots(PyQt_PyObject)"),i/float(N-1)*100)
-
-            if self.stop:
-                break
-
-        self.emit(QtCore.SIGNAL("updateplots(PyQt_PyObject)"),i/float(N-1)*100)
-        self.dlg.copyMain()
-#        Need to move copymain into this thread?
-#        Or call self.dlg.copyMain()?
+            self.flowarray[i+1]=cond
+            print "Flow for %i is %2.15e" % (i,cond)
         
-
-
-
-
 class addingDlg(QtGui.QDialog, addingui.Ui_Dialog):
     def __init__(self,parent=None,project=None):
         # Ui setup
@@ -166,10 +149,12 @@ class addingDlg(QtGui.QDialog, addingui.Ui_Dialog):
         self.comboBox.addItems(['Random','Beach Ball','Circle','Star','Normal'])
         self.NLINKS=100
         self.dial.setMaximum(self.NLINKS)
-
+        
         # Variables
         self.project=project
         self.currentLink=0
+
+        self.thread=AddingThread(self)
         
         # Connections
         self.dial.valueChanged.connect(self.dialChanged)
@@ -180,6 +165,8 @@ class addingDlg(QtGui.QDialog, addingui.Ui_Dialog):
         # Actions
         self.calcTopInds()
         self.init2()
+
+
         
     def init2(self):
         self.x, self.y=self.project.habitat()
@@ -187,6 +174,7 @@ class addingDlg(QtGui.QDialog, addingui.Ui_Dialog):
         self.newHab=self.hab*0.0
         self.draw(self.currentLink)
         self.showNewHab()
+
         
     def calcTopInds(self):
         print "Calculating top inds"
@@ -272,4 +260,4 @@ class addingDlg(QtGui.QDialog, addingui.Ui_Dialog):
         print "y",y
         print "v",v
         
-        
+        self.thread.start()

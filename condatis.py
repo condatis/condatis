@@ -1,4 +1,16 @@
 #!/usr/bin/env python
+
+""" """
+
+__author__ = "David Wallis"
+__copyright__ = "Copyright 2015, D.W Wallis and J.A Hodgson"
+__credits__ = ["Aidan Lonergan", "Andrew Suggitt", "Atte Moilanen", "Chloe Bellamy", "Duncan Blake", "Geoffrey Heard", "James Latham", "Jamie Robins", "Jonathan Rothwell", "Jonathan Winn", "Kevin Watts", "Nicholas Macgregor", "Nik Bruce", "Paul Evans", "Phil Baarda", "Sarah Scriven", "Sarah Taylor", "Sheila George", "Steve Palmer", "Tim Graham", "Tom Squires", "Vicky Kindemba", "The authors also acknowledge funding from the UK Natural Environment Research Council grant number NE/L002787/1."]
+__license__ = "GPL"
+__version__ = "0.6.0"
+__maintainer__ = "D.W. Wallis"
+__email__ = "d.wallis@liv.ac.uk"
+__status__ = "Development"
+
 import copy
 import cPickle as pickle
 from mplwidget import MplWidget
@@ -14,13 +26,9 @@ import sourcesinkui
 from matplotlib.backends.backend_qt4agg import \
     NavigationToolbar2QTAgg as NavigationToolbar
 import project.metrics as metrics
-#import forwardoptui
-#import droppingi
-#import dropping
 import calculatingui
 from PIL import Image
 import gc
-#from timeit import Timer
 import cProfile
 import re
 import manualui
@@ -41,16 +49,22 @@ import cStringIO
 import traceback
 import patterns
 import sourcesinkgui
-#import settings
 import addinggui
 import registergui
 import aboutgui
+import manualgui
 
 #REVISION="$Rev: 18 $"
 REVISION="$Rev: 18 $"
 sp=string.split(REVISION)
 
 VERSION="0.4."+sp[1]
+
+def makeIfNot(dir):
+    print "makeNotIf:",dir
+    if not os.path.exists(dir):
+        print "Path doesn't exist, attempting to create",dir
+        os.makedirs(str(dir))
 
 def excepthook(excType, excValue, tracebackobj):
     """
@@ -62,7 +76,7 @@ def excepthook(excType, excValue, tracebackobj):
     """
 
     separator = '-' * 80
-    logFile = "simple.log"
+    logFile = "condatiserror.log"
 
     notice="An unhandled exception occured. Please help to improve this software by telling us about this problem. Please copy the error report below and send it an in an email to: econets@liverpool.ac.uk\n"
     versionInfo=VERSION
@@ -87,73 +101,9 @@ def excepthook(excType, excValue, tracebackobj):
     errorbox.setText(str(notice)+str(msg)+"Version:"+str(versionInfo))
     errorbox.exec_()
 
-# Comment out to leave exceptions on the terminal
-sys.excepthook = excepthook
-
-
-# class EconetMain(econetui.Ui_MainWindow):
-#     def __init__(self,parent=None):
-#         econetui.Ui_MainWindow.__init__(self)
-
 def getScriptPath():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
-class ManualDialog(QtGui.QDialog,manualui.Ui_ManualDialog):
-    def __init__(self,parent=None):
-        QtGui.QDialog.__init__(self,parent)
-        self.setupUi(self)
-        path=os.getcwd()
-        path=getScriptPath()
-        url=QtCore.QUrl.fromLocalFile(path + "/doc/manual/index.html")
-        logging.debug(str(url))
-#        self.webView.load(QtCore.QUrl("file:///Users/dww/Dropbox/svnco/econet/doc/econet/index.html"))
-        self.home()
-
-        self.connect(self.pbBack, QtCore.SIGNAL("clicked()"), self.webView.back)
-        self.connect(self.pbForwards, QtCore.SIGNAL("clicked()"), self.webView.forward)
-        self.connect(self.pbHome, QtCore.SIGNAL("clicked()"), self.home)
-        self.connect(self.pbClose, QtCore.SIGNAL("clicked()"), self.winclose)
-
-    def home(self):
-        path=os.getcwd()
-        url=QtCore.QUrl.fromLocalFile(path + "/doc/manual/index.html")
-        self.webView.load(url)
-
-    def winclose(self):
-        self.close() 
-
-    def closeEvent(self,event):
-        self.parent().actionManual.setChecked(False)
-
-
-        
-
-
-
-# class ForwardOptDialog(QtGui.QDialog,forwardoptui.Ui_forwardOptDialog):
-#     def __init__(self,parent=None):
-#         QtGui.QDialog.__init__(self,parent)
-#         self.setupUi(self)
-
-#         QtCore.QObject.connect(self.applyThreshButton, QtCore.SIGNAL("clicked()"), 
-#                                self.applyThreshold)
-
-#         QtCore.QObject.connect(self.findTopButton, QtCore.SIGNAL("clicked()"), 
-#                                self.findTop)
-
-#     def findTop(self):
-#         print "Finding top power links."
-#         ecoplot.showTopPowers(self.parent().mainCanvas(),self.parent().project)
-
-#     def applyThreshold(self):
-#         print "Applying Threshold"
-#         self.parent().showMessage("Applying threshold. Please wait...")
-#         self.parent().project.powerThreshold=self.threshSpinBox.value()
-#         if not self.parent().fCurrentView==self.parent().fPowerView:
-#             self.parent().powerView()
-#         else:
-#             ecoplot.showPowerConnects(self.parent().mainCanvas(),self.parent().project)
-# #        self.fCurrentView[self.subFig](self.mainCanvas(),self.project)
 
 
 class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
@@ -168,6 +118,7 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         else:
             settingsgui.appsettings=settingsgui.Settings()
         self.settingsDlg.setFromSettings(settingsgui.appsettings)
+        self.checkMakeDirectories()
         
         # Add matplotlib's navigation toolbar.
         self.mpl_toolbar = NavigationToolbar(self.mainfig.canvas, self.centralwidget)
@@ -195,37 +146,24 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         self.fVoltView=[ecoplot.showFlow,
                         ecoplot.showVoltage,
                         ecoplot.showVoltageLayers,
-#                        ecoplot.showVoltageContour]
                         ecoplot.showSortedVoltage]
-#                        ecoplot.showHabSourceSink,]
         self.voltTips=['Flow','Progress', 'Isolated Areas','Layers','Habitat']
-        # self.fPowerView=[ecoplot.showPowerConnects,
-        #                ecoplot.showEdgePower,
-        #                ecoplot.showCumSumLog,
-        #                ecoplot.showCumSum,
-        #                  ecoplot.showNull]
-        self.fPowerView=[ecoplot.showEdgePower,
-#                         ecoplot.showPowerConnects,
+        self.fPowerView=[ecoplot.showSigEdgePower,
                          ecoplot.showVoltageContour,
                          ecoplot.showCumSum,
-                         ecoplot.showNull]
-                         
-        #                ecoplot.showEdgePower,
-        #                ecoplot.showCumSumLog,
-        #                ecoplot.showCumSum,
-        #                  ecoplot.showNull]
-        self.powerTips=['Bottlenecks','Progress Contours','link powers','',]
+                         ecoplot.showCumSumPC]
+        self.powerTips=['Bottlenecks','Progress Contours','Cumulative Power','Percentage Cumulative Power',]
         self.fDroppingView=[ecoplot.showDroppingDropped,
                             ecoplot.showDroppingNewHab,
                             ecoplot.showDroppingFlow,
                             ecoplot.showDroppingPCFlow]
-        self.droppingTips=['New Habitat','','',''] 
+        self.droppingTips=['Dropped Habitat','New Habitat','Dropped Node Flow',''] 
         self.fPopulationView=[ecoplot.showPatchLoss,
                        ecoplot.showPatchPArea,
                        ecoplot.showNull,
                        ecoplot.showNull,
                         ecoplot.showNull]
-        self.populationTips=['Patch Loss','Area Loss','','','Habitat'] 
+        self.populationTips=['Patch Loss','Area Loss','','',''] 
         self.fComparisonView=[ecoplot.showFlowComparison,
                        ecoplot.showAreaComparison,
                        ecoplot.showMetapopComparison,
@@ -272,20 +210,17 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         self.actionProject_Data.triggered.connect(self.exportProjectData)
         self.actionCurrent_Map.triggered.connect(self.exportCurrentMap)
         self.listWidget.itemClicked.connect(self.selectHistory)
-#        self.mapScaleSpinBox.valueChanged.connect(self.mapScaleChanged)
-#        self.areaScaleSpinBox.valueChanged.connect(self.areaScaleChanged)
         self.actionBackwards_Improvement.toggled.connect(self.openDroppingDialog)
         self.actionForward_Optimise.toggled.connect(self.adding)
-#        self.cumPowerSpinBox.valueChanged.connect(self.cumPowerChanged)
-#        self.layersSpinBox.valueChanged.connect(self.layersChanged)
-        self.cumGoButton.clicked.connect(self.cumPowerChanged)
-#        self.layGoButton.clicked.connect(self.layersChanged)
+        self.cumPowerSpinBox.valueChanged.connect(self.cumPowerChanged)
+        self.cumGoButton.clicked.connect(self.goButtonPressed)
         self.actionManual.toggled.connect(self.openManual)
         self.actionWhats_This.triggered.connect(self.whatsThis)
         self.actionVoltage_Map.triggered.connect(self.exportVoltageMap)
         self.actionDropped_Habitat_2.triggered.connect(self.exportDroppedHabitat)
         self.actionDropping_Map.triggered.connect(self.exportDroppedRankMap)
         self.actionVoltage_Layers_Map.triggered.connect(self.exportVoltageLayersMap)
+        self.actionHabitat_Map.triggered.connect(self.exportHabitatMap)
         self.actionSource_Map.triggered.connect(self.exportSourceMap)
         self.actionSink_Map.triggered.connect(self.exportSinkMap)
         self.actionFlow_Map.triggered.connect(self.exportFlowMap)
@@ -375,15 +310,26 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         QtGui.QMessageBox.about(self, "About", "Condatis. \n\nCopyright The University of Liverpool (2014).\nVersion %s\n\nThis is a Beta version of software issued only to members of the Condatis project for testing.\nPlease do redistribute this software. If you are interested in obtaining a copy then please contact either:\n\nJenny Hodgson - jenny.hodgson@liverpool.ac.uk\nDavid Wallis - d.wallis@liverpool.ac.uk. " % VERSION)
 
 
+    def checkMakeDirectories(self):
+        # Make all the directories if they don't exist.
+        base=settingsgui.appsettings.path
+        makeIfNot(base)
+        for i in ['maps','projects','exports']:
+            filename=base+'/'+i
+            print "settings file is: ",filename
+            makeIfNot(filename)    
+
     def settings(self):
-        # if self.settingsDlg is None:
-        #     self.settingsDlg=settingsgui.SettingsDialog(self,project=self.project)
         if self.settingsDlg.exec_():
+            # Have to save the registered status to stop
+            # overwriting it
+            reg=settingsgui.appsettings.registered
             st=self.settingsDlg.getRawData()
-            print st
+            # Put the registered status back to what it was
+            st.registered=reg
             settingsgui.appsettings=st
             settingsgui.saveSettings(st)
-
+            self.checkMakeDirectories()
 
     def onpoint(self,stat):
  #       print stat
@@ -438,7 +384,10 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         vvv=xxx*0+val
 
         if layer==0:
+            ms=self.project.scenario._v_attrs.map_x_scale
             self.project.add2hab(xxx,yyy,vvv)
+            if self.project.scenario._v_attrs.map_x_scale == 1.0:
+                self.project.scenario._v_attrs.map_x_scale = ms
         if layer==1:
             self.project.add2source(xx,yy)
         if layer==2:
@@ -481,19 +430,23 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
                 self.droppingDialog = droppinggui.DroppingDialog(self,self.project)
             self.droppingDialog.show()
             self.droppingDialog.init()
-#            self.powerView()
         else:
             if self.droppingDialog:
                 self.droppingDialog.hide()
         
 
-    def cumPowerChanged(self):
+    def goButtonPressed(self):
         val=self.cumPowerSpinBox.value()
-        self.project.scTopNIndsclear()
         self.project.cumPowerThreshold=val
         if not self.fCurrentView == self.fPowerView:
             self.powerView()
-        ecoplot.showEdgePower(self.mainCanvas(),self.project)
+        ecoplot.showSigEdgePower(self.mainCanvas(),self.project)
+                
+    def cumPowerChanged(self):
+        val=self.cumPowerSpinBox.value()
+        self.project.cumPowerThreshold=val
+        print "Setting threshold to: ", val
+        ecoplot.showCumSum(self.mainCanvas(),self.project)
         
 
     def layersChanged(self):
@@ -696,18 +649,10 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
             fname = str(fileinfo.canonicalFilePath())
             self.projectName=fname
             self.doSaveProject
-        
-#    def doSaveProject(self):
-#        pickle.dump(self.lslist,open(self.projectName,"wb"))
 
     def saveProject(self):
         logging.info("Saving project")
         self.project.saveProject()
-
-        # if self.projectName is "Untitled.eho":
-        #     self.guiSaveProject()
-        # else:
-        #     self.doSaveProject()
 
     def saveProjectAs(self,fname):
         pass
@@ -864,38 +809,26 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
                 NODATA=exportgis.NODATA_INT
 
             a=a*mult
-            # The next 4 lines make non-habitat cells 'No Data Value'.
-#            NDV=proj[0]
-#            print "No data value:",NDV
-#            if NDV==None:
-#                NDV=-9999
-
-            # b=a*0+1.0
-            # b[self.project.habitat()]=0
-            # a[np.where(b)]=NDV
-
-
             wa=np.where(a)
             b=np.zeros(a.shape).astype(a.dtype)+NODATA
             b[wa]=a[wa]
             a=b
-#            a=self.project.nodeVoltageA()*mult
             f=exportgis.createGeoFile(op,driver,a,proj,dtype=dtype)
 
     def exportVoltageMap(self):
         a=self.project.nodeVoltageA()
         self.exportMap(a,"progress")
 
+    def exportHabitatMap(self):
+        a=self.project.habitatMaskUnexpanded()
+        self.exportMap(a,"habitat")
+        
     def exportSourceMap(self):
-        a=self.project.sourceMask()
-        print "min source: ", np.min(a)
-        print "max source: ", np.max(a)
+        a=self.project.sourceMaskUnexpanded()
         self.exportMap(a,"source")
 
     def exportSinkMap(self):
-        a=self.project.sinkMask()
-        print "min target: ", np.min(a)
-        print "max target: ", np.max(a)
+        a=self.project.sinkMaskUnexpanded()
         self.exportMap(a,"target")
 
     def exportDroppedHabitat(self):
@@ -940,7 +873,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
             ii=indlist[i]
             da[xnew[ii],ynew[ii]]=i
         self.exportMap(da,"rank",dtype=gdal.GDT_Int32)
-#        self.exportMap(da,"rank")
 
     def exportCurrentMap(self):
         logging.info("Export current Map")
@@ -1036,11 +968,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         N=self.project.selectedN()
         print "Updating list and setting row to %d" % N
         self.listWidget.setCurrentRow(N)
-
-#        for i in self.project.h5file.walkGroups('/scenarios'):
-#            self.listWidget.addItem(i._v_attrs.rasterName)
-
-
 
     def deleteScenario(self):
         logging.info("Delete Scenario")
@@ -1180,6 +1107,10 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
     def genSourceSink(self,ssdConf):
         ditch,sstype,width,ch=ssdConf
         rsx,rsy=self.project.habitatSize()
+        rsx-=0
+        rsy-=0
+        print "Gen source and sink, rsx",rsx
+        print "Gen source and sink, rsy",rsy
         if sstype==-3:
             sx=(np.arange(rsx*width)%rsx).astype(np.int_)
             sy=(np.arange(rsx*width)/rsx).astype(np.int_)
@@ -1254,19 +1185,12 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
                 
             self.setButtonStates()
 
-#    def updateKParams(self):
-        
 
     def readKParams(self):
         self.project.scenario._v_attrs.R=self.rSpinBox.value()
-#        self.project.scenario._v_attrs.dispersal=self.dispersalEdit.text().toDouble()[0]
         self.project.scenario._v_attrs.dispersal=self.dispersalSpinBox.value()
 
     def docalc(self):
-        # if not self.project.distsCalculated():
-        #     self.project.calcDists()
-        #     logging.info("Distances calculated")
-
         self.project.calcDists()
         self.readKParams()           
         self.project.calcIpvIn()
@@ -1305,13 +1229,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
             metrics.clearMetrics(self.project.scenario)
             self.setButtonStates()
             self.project.scVLPclear()
-            # print "Calculation time: "
-#            cProfile.run(re.compile("self.docalc()"))
-            # t=Timer("""self.docalc()""")
-            # print "Calculation time: ",
-            # self.docalc()
-#            tm= t.timeit()
-#            print tm
 
     def calcPower(self):
         self.project.calcPower()
@@ -1450,10 +1367,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         self.originYSpinBox.setValue(0)
         self.cellSizeXSpinBox.setValue(0)
         self.cellSizeYSpinBox.setValue(0)
-#        self.projectionEdit.setText(self.project.projectionName())
-
-        # self.mapScaleSpinBox.setValue(self.project.mapscale())
-        # self.areaScaleSpinBox.setValue(self.project.areascale())
         self.lineEdit_1.setText(QtCore.QString().setNum(0))
         self.lineEdit_2.setText(QtCore.QString().setNum(0))
         self.lineEdit_3.setText(QtCore.QString().setNum(0))
@@ -1470,24 +1383,10 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         self.originYSpinBox.setValue(self.project.originY())
         self.cellSizeXSpinBox.setValue(self.project.cellSizeX())
         self.cellSizeYSpinBox.setValue(self.project.cellSizeY())
-#        self.projectionEdit.setText(self.project.projectionName())
-
-        # self.mapScaleSpinBox.setValue(self.project.mapscale())
-        # self.areaScaleSpinBox.setValue(self.project.areascale())
         self.lineEdit_1.setText(QtCore.QString().setNum(self.project.networkFlow()))
         self.lineEdit_2.setText(QtCore.QString().setNum(1.0/self.project.networkFlow()))
-#        print "** Numerical metatpop: ", self.project.metapopCapacity()
-#        print "** String metatpop: ", QtCore.QString().setNum(self.project.metapopCapacity())
         self.lineEdit_3.setText(QtCore.QString().setNum(self.project.metapopCapacity()))
         self.lineEdit_4.setText(QtCore.QString().setNum(self.project.totalLinkStrength()))
-
-#         self.lineEdit_7.setText(QtCore.QString().setNum(self.project.habitatN()))
-#         self.lineEdit_4.setText(QtCore.QString().setNum(self.project.totalArea(),precision=2))
-#         self.lineEdit_5.setText(QtCore.QString().setNum(self.project.rasterSize()[0]))
-#         self.lineEdit_6.setText(QtCore.QString().setNum(self.project.rasterSize()[1]))
-# #        self.r_edit.setText(QtCore.QString().setNum(self.project.R()))
-#        self.dispersalEdit.setText(QtCore.QString().setNum(self.project.dispersal()))
-
 
     def switchAllOff(self,state=False):
         self.actionView_Voltage.setEnabled(state)
@@ -1572,51 +1471,10 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         if self.project.scenario.__contains__("indlist"):
             self.actionDropping_Filter.setEnabled(True)
 
-    # def setButtonsCalc(self,state=True):
-    #     self.actionConductance.setEnabled(state)
-    #     self.actionCalculate_All.setEnabled(state)
-    #     self.actionForward_Optimise.setEnabled(state)
-    #     self.actionBackwards_Improvement.setEnabled(state)
-    #     self.actionViability.setEnabled(state)
-    #     self.actionCalculate_Metrics.setEnabled(state)
-    #     self.actionBackwards_Improvement.setEnabled(state)
-
-    # def setButtonsWithScenario(self,state=True):
-    #     if not self.project.scenario._v_attrs.I0==0.0:
-    #         self.actionView_Voltage.setEnabled(state)
-    #         self.actionView_Power.setEnabled(state)
-    #     if self.project.scenario.metrics.__contains__('ViL'):
-    #         self.actionView_Population.setEnabled(state)
-    #     self.actionComparison_View.setEnabled(state)
-    #     self.actionView_Map.setEnabled(state)
-    #     self.actionDelete_From_Scenarios.setEnabled(state)
-    #     self.actionDuplicate_Scenario.setEnabled(state)
-    #     self.actionAdd_Source_Sink.setEnabled(state)
-    #     self.actionSave_Image.setEnabled(state)
-    #     self.actionPrint.setEnabled(state)
-
-    # def setHabState(self,state=False):
-    #     self.actionConductance.setEnabled(state)
-    #     self.actionForward_Optimise.setEnabled(state)
-    #     self.actionBackwards_Improvement.setEnabled(state)
-    #     self.actionViability.setEnabled(state)
-    #     self.actionView_Map.setEnabled(state)
-    #     self.actionView_Voltage.setEnabled(state)
-    #     self.actionView_Power.setEnabled(state)
-    #     self.actionDelete_From_Scenarios.setEnabled(state)
-    #     self.actionDuplicate_Scenario.setEnabled(state)
-    #     self.actionAdd_Source_Sink.setEnabled(state)
-    #     self.actionSave_Image.setEnabled(state)
-    #     self.actionPrint.setEnabled(state)
-
-
     def closeApp(self):
         self.close()
 
 
-def makeIfNot(dir):
-    if not os.path.exists(dir):
-        os.makedirs(dir)
         
 def initDirectories():
     hd=os.path.expanduser('~')
@@ -1632,7 +1490,7 @@ def initDirectories():
 if __name__ == "__main__":
     import sys
     logging.root.setLevel(logging.DEBUG)
-    logging.basicConfig(filename='condatis.log')
+#    logging.basicConfig(filename='condatis.log')
 
     initDirectories()
     
@@ -1643,15 +1501,5 @@ if __name__ == "__main__":
     else:
         MainWindow = MyMain()
 
-#    ax=MainWindow.mainfig.canvas.ax
-#    ecplot.showHabitat(ax,ls)
-
-    # x=np.asarray([i/100.*2.0*np.pi for i in range(100)])
-    # for i in range(5):
-    #     ax=MainWindow.fig[i].canvas.ax
-    #     y=np.sin(i*x)
-    #     ax.plot(x,y)
-        
-    #MainWindow.show()
     sys.exit(app.exec_())
 

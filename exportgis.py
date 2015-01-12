@@ -73,6 +73,7 @@ def getGeoInfo(fileName):
 
 
 def createGeoFile(name,driver,a,projinfo,dtype=gdal.GDT_Float64):
+    print "In createFeoFile,a shape",a.shape
     NDV,xsize,ysize,GeoT,Projection,DataType=projinfo
 #    if NDV==None:
 #        NDV=-9999
@@ -81,6 +82,7 @@ def createGeoFile(name,driver,a,projinfo,dtype=gdal.GDT_Float64):
         NDV=NODATA_FLOAT
     else:
         NDV=NODATA_INT
+
 
     NewFileName = name
     # Set nans to the original No Data Value

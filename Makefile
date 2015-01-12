@@ -52,7 +52,7 @@ exe: econet.py
 	pyinstaller  --icon econet.ico econet.py 
 
 clean:
-	rm -rf econet_rc.py econetui.py sourcesinkui.py calculatingui.py manualui.py exportgisui.py droppingui.py dropfilterui.py openhabitatui.py settingsui.py addcellui.py addingui.py
+	rm -rf econet_rc.py econetui.py sourcesinkui.py calculatingui.py manualui.py exportgisui.py droppingui.py dropfilterui.py openhabitatui.py settingsui.py addcellui.py addingui.py registerui.py aboutui.py
 	rm -rf *.pyc
 	rm -rf *.h5
 	rm -rf *.py~

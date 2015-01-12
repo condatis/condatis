@@ -118,6 +118,7 @@
     <addaction name="actionFlow_Map"/>
     <addaction name="actionVoltage_Layers_Map"/>
     <addaction name="actionVoltage_Map"/>
+    <addaction name="actionHabitat_Map"/>
     <addaction name="actionSource_Map"/>
     <addaction name="actionSink_Map"/>
     <addaction name="separator"/>
@@ -507,7 +508,7 @@
                <double>100.000000000000000</double>
               </property>
               <property name="value">
-               <double>99.000000000000000</double>
+               <double>50.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -1402,6 +1403,11 @@
    </property>
    <property name="statusTip">
     <string>Edit points on the habitat map.</string>
+   </property>
+  </action>
+  <action name="actionHabitat_Map">
+   <property name="text">
+    <string>Habitat Map</string>
    </property>
   </action>
  </widget>

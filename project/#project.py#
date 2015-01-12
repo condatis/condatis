@@ -749,7 +749,6 @@ class Project():
                 r[i]=0
         return r
 
-
     def allTLS(self):
         N=self.numberOfScenarios()
         curr=self.scenario
