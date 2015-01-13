@@ -55,3 +55,17 @@ target/
 
 condatis.save
 .gitignore~
+aboutui.py
+addcellui.py
+addingui.py
+calculatingui.py
+dropfilterui.py
+droppingui.py
+econet_rc.py
+econetui.py
+exportgisui.py
+manualui.py
+openhabitatui.py
+registerui.py
+settingsui.py
+sourcesinkui.py
