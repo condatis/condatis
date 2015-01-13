@@ -17,8 +17,8 @@ Additional term under GNU GPL version 3 section 7.
 
 A1) If you convey a modified version of this work:
 (i) you should delete the text that appears in the Acknowledgements tab of the About box in the Condatis user interface.
-(ii) a comment at the head of any file containing the source code derived from this covered work should read: ?Part of this work is a modified version of the work Condatis v.[version number] Copyright (c)[year]  D.W. Wallis and J.A. Hodgson.  Our modification was permitted by the GNU General Public License v.3. Instructions for obtaining the original version of Condatis can be found at www.condatis.org.uk. Any modified or verbatim copies of our work must preserve this notice.? Where text in square brackets should be replaced by the appropriate numbers.
-(iii) if your modified work has a user interface, the user interface should prominently display the notice: ?Part of this work is a modified version of the work Condatis v.[version number] Copyright (c)[year]  D.W. Wallis and J.A. Hodgson.  See www.condatis.org.uk.? Where text in square brackets should be replaced by the appropriate numbers.
+(ii) a comment at the head of any file containing the source code derived from this covered work should read: "Part of this work is a modified version of the work Condatis v.[version number] Copyright (c)[year]  D.W. Wallis and J.A. Hodgson.  Our modification was permitted by the GNU General Public License v.3. Instructions for obtaining the original version of Condatis can be found at www.condatis.org.uk. Any modified or verbatim copies of our work must preserve this notice." Where text in square brackets should be replaced by the appropriate numbers.
+(iii) if your modified work has a user interface, the user interface should prominently display the notice: "Part of this work is a modified version of the work Condatis v.[version number] Copyright (c)[year]  D.W. Wallis and J.A. Hodgson.  See www.condatis.org.uk." Where text in square brackets should be replaced by the appropriate numbers.
 """
 
 from PyQt4 import QtCore, QtGui
@@ -73,18 +73,18 @@ Version %s
       <li>(i) you should delete the text that appears in the Acknowledgements
         tab of the About box in the Condatis user interface.</li>
       <li>(ii) a comment at the head of any file containing the source code
-        derived from this covered work should read: Part of this work is a
+        derived from this covered work should read: &quot;Part of this work is a
         modified version of the work Condatis v.[version number] Copyright &#169;
         [year]&nbsp; D.W. Wallis and J.A. Hodgson.&nbsp; Our modification was
         permitted by the GNU General Public License v.3. Instructions for
         obtaining the original version of Condatis can be found at
         www.condatis.org.uk. Any modified or verbatim copies of our work must
-        preserve this notice. Where text in square brackets should be replaced
+        preserve this notice.&quot; Where text in square brackets should be replaced
         by the appropriate numbers.</li>
       <li>(iii) if your modified work has a user interface, the user interface
-        should prominently display the notice: Part of this work is a modified
+        should prominently display the notice: &quot;Part of this work is a modified
         version of the work Condatis v.[version number] Copyright &#169; [year]&nbsp;
-        D.W. Wallis and J.A. Hodgson.&nbsp; See www.condatis.org.uk. Where text
+        D.W. Wallis and J.A. Hodgson.&nbsp; See www.condatis.org.uk.&quot; Where text
         in square brackets should be replaced by the appropriate numbers.</li>
     </ul>
   </body>

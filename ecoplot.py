@@ -386,7 +386,26 @@ def showSortedVoltage(can,project):
 def showConnections(can,project):
     initfig(can,ticksOff=False)
 
+
 def showFlowComparison(can,project):
+    initfig(can,ticksOff=False)
+    fl=project.labelledFlows()
+    y=np.array([ i[1] for i in fl])
+    x=np.arange(y.size)
+    binnames=[ i[0] for i in fl]
+    can.ax.set_xticks(x+.3)
+    can.ax.set_xticklabels(binnames)
+    width=.6
+    can.ax.bar(x,y,width)
+    can.ax.set_title('Speed')
+    can.ax.set_xlabel("Scenario")
+    can.ax.set_ylabel("Speed")
+#    can.ax.axis([-.5,y.size-.5,0,np.max(y)*1.2])
+    can.fig.subplots_adjust(bottom=.1,top=topgap,left=.15,right=rightgap)
+    can.draw()
+   
+    
+def showFlowComparison_orig(can,project):
     initfig(can,ticksOff=False)
     y=project.allFlows()
     x=np.arange(y.size)
@@ -404,7 +423,7 @@ def showFlowComparison(can,project):
     can.fig.subplots_adjust(bottom=.1,top=topgap,left=.15,right=rightgap)
     can.draw()
 
-def showAreaComparison(can,project):
+def showAreaComparison_orig(can,project):
     initfig(can,ticksOff=False)
     y=project.allAreas()
     x=np.arange(y.size)
@@ -420,11 +439,29 @@ def showAreaComparison(can,project):
     can.fig.subplots_adjust(bottom=.1,top=topgap,left=.15,right=rightgap)
     can.draw()
 
+def showAreaComparison(can,project):
+    initfig(can,ticksOff=False)
+    ap=project.labelledAreas()
+    y=np.array([ i[1] for i in ap ])
+    x=np.arange(y.size)
+    binnames=[ i[0] for i in ap ]
+    can.ax.set_xticks(x+.3)
+    can.ax.set_xticklabels(binnames)
+    width=.6
+    can.ax.bar(x,y,width)
+    can.ax.set_title('Landscape Area')
+    can.ax.set_xlabel("Scenario")
+    can.ax.set_ylabel("Area")
+#    can.ax.axis([-.5,y.size-.5,0,np.max(y)*1.2])
+    can.fig.subplots_adjust(bottom=.1,top=topgap,left=.15,right=rightgap)
+    can.draw()
+
 def showMetapopComparison(can,project):
     initfig(can,ticksOff=False)
-    y=project.allMetapopCapacity()
+    mp=project.labelledMetapopCapacity()
+    y=np.array([ i[1] for i in mp ])
     x=np.arange(y.size)
-    binnames=project.allNames()
+    binnames=[ i[0] for i in mp ] 
     can.ax.set_xticks(x+.3)
     can.ax.set_xticklabels(binnames)
     width=.6
@@ -438,9 +475,10 @@ def showMetapopComparison(can,project):
 
 def showTLSComparison(can,project):
     initfig(can,ticksOff=False)
-    y=project.allTLS()
+    tls=project.labelledTLS()
+    y=np.array([i[1] for i in tls])
     x=np.arange(y.size)
-    binnames=project.allNames()
+    binnames=[i[0] for i in tls]
     can.ax.set_xticks(x+.3)
     can.ax.set_xticklabels(binnames)
     width=.6
@@ -1324,13 +1362,14 @@ def showCumSumPC(can,project):
         x=np.arange(pp_cum.size)
         x=-x
         x-=x[-1]
-        y=np.max(pp_cum)-pp_cum
-        maxy=np.max(y[-120:])
-        can.ax.plot(x,y/maxy*100,'r.')
+        yd=(np.max(pp_cum)-pp_cum)
+        maxy=np.max(yd)
+        y=yd/maxy
+        can.ax.plot(x,y*100,'r.')
 
         # Plot threshold
         thresh=project.cumPowerThreshold/100.0
-        thr=thresh*max(y)
+        thr=thresh*maxy
         ythr=y*0+thr
         can.ax.plot(x,ythr/maxy*100)
 

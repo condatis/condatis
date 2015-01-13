@@ -57,4 +57,4 @@ clean:
 	rm -rf *.h5
 	rm -rf *.py~
 	rm -rf Makefile~
-
+	rm project/*.pyc

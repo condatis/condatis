@@ -897,7 +897,7 @@ def solve_(h5,sc):
     h5.flush()
 
 
-def getNth(h5,N):
+def getNth_bad(h5,N):
     i=0
     for sc in h5.root.scenarios:
         if i==N:
@@ -914,7 +914,7 @@ def getNth_orig2(h5,N):
             return i
     return False
 
-def getNth_orig(h5,N):
+def getNth(h5,N):
     for i in h5.root.scenarios:
         if i._v_attrs.ind==N:
             return i

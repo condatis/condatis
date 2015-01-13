@@ -39,7 +39,7 @@ class ManualDialog(QtGui.QDialog,manualui.Ui_ManualDialog):
 
     def home(self):
         path=os.getcwd()
-        url=QtCore.QUrl.fromLocalFile(path + "/doc/manual/index.html")
+        url=QtCore.QUrl.fromLocalFile(self.url)
         self.webView.load(url)
 
     def winclose(self):

@@ -770,7 +770,37 @@ class Project():
                 r[i]=0
         return r
 
+    def labelledFlows(self):
+        r=[]
+        for i in self.h5file.root.scenarios:
+            r.append([i._v_name,i._v_attrs.I0])
+        return r
 
+    def labelledAreas(self):
+        r=[]
+        for i in self.h5file.root.scenarios:
+            area=np.sum(i.ap.read())
+            r.append([i._v_name,area])
+        return r
+        
+    def labelledTLS(self):
+        r=[]
+        for i in self.h5file.root.scenarios:
+            tls=0
+            if i._v_attrs.__contains__('totalLinkStrength'):
+                tls=i._v_attrs.totalLinkStrength
+            r.append([i._v_name,tls])
+        return r
+        
+    def labelledMetapopCapacity(self):
+        r=[]
+        for i in self.h5file.root.scenarios:
+            tls=0
+            if i._v_attrs.__contains__('metapopCapacity'):
+                tls=i._v_attrs.metapopCapacity
+            r.append([i._v_name,tls])
+        return r
+    
     def allTLS(self):
         N=self.numberOfScenarios()
         curr=self.scenario

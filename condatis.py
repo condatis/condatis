@@ -270,12 +270,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         self.navbarflag=False
         self.addingdlg=None
 
-        print "projFile()",self.projFile()
-        print "projFileName()",self.projFileName()
-        print "projName()",self.projName()
-        print "projPath()",self.projPath()
-
-
 
     def adding(self,state):
         if state:
@@ -336,7 +330,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         makeIfNot(base)
         for i in ['maps','projects','exports']:
             filename=base+'/'+i
-            print "settings file is: ",filename
             makeIfNot(filename)    
 
     def settings(self):
@@ -352,7 +345,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
             self.checkMakeDirectories()
 
     def onpoint(self,stat):
- #       print stat
         if stat:
             self.clickstate='point'
         else:
@@ -424,9 +416,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
                     xnew,ynew,val,r,N=dlg.getValues()
                     layer=dlg.getLayer()
                     pattern=dlg.getPattern()
-                    print xnew,ynew,val,r,N
-                    print layer
-                    print pattern
 
                     reply = QtGui.QMessageBox.question(self, 'Message',
                             "Are you sure? This Cannot be undone!", QtGui.QMessageBox.Yes | 
@@ -465,7 +454,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
     def cumPowerChanged(self):
         val=self.cumPowerSpinBox.value()
         self.project.cumPowerThreshold=val
-        print "Setting threshold to: ", val
         ecoplot.showCumSum(self.mainCanvas(),self.project)
         
 
@@ -961,34 +949,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         if not self.dropFilterDlg is None:
             self.dropFilterDlg.sync()
 
-    def selectHistoryOrig(self):
-        self.showMessage('Loading scenario.')           
-        selected=self.listWidget.currentRow()
-        print "You clicked on item %d in the list" % selected
-#        scenarios=con.getScenarios(self.project.h5file)
-        ns=con.getOrderedInds(self.project.h5file)
-        print "Items in project: ",ns
-        print "Index for the new item is %d" % ns[selected]
-        self.project.scenario=con.getNth(self.project.h5file,ns[selected])
-        print "New scenario selected, index is %d" % self.project.scenario._v_attrs.ind
-        self.habitatView()
-        self.infoBox()
-        self.updateList()
-        print
-        self.setButtonStates()
-        msg="Scenario %s selected" % self.project.scenario._v_name
-        self.showMessage(msg)
-
-    def updateList_nomore(self):
-        self.listWidget.clear()
-        for i in self.project.h5file.root.scenarios._v_children.keys():
-            self.listWidget.addItem(i)
-#            self.listWidget.addItem(i._v_attrs.rasterName)
-        sc=self.project.scenario
-        N=self.project.selectedN()
-        print "Updating list and setting row to %d" % N
-        self.listWidget.setCurrentRow(N)
-
     def deleteScenario(self):
         logging.info("Delete Scenario")
         self.project.deleteScenario()
@@ -1013,16 +973,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
             self.project.renameScenario(str(text))
             self.infoBox()
             self.updateList()
-
-    def selectHistoryOld(self):
-        self.showMessage('Loading scenario.')           
-        selected=self.listWidget.currentRow()-1
-        print selected
-        key=self.project.h5file.root.scenarios._v_children.keys()[selected]
-        print "Selecting scenario: Key is: ",key
-        self.project.scenario=self.project.h5file.root.scenarios._v_children[key]
-        self.habitatView()
-        self.infoBox()
 
 
     def openHabitat(self,fname,mincut=0):
@@ -1129,8 +1079,6 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         rsx,rsy=self.project.habitatSize()
         rsx-=0
         rsy-=0
-        print "Gen source and sink, rsx",rsx
-        print "Gen source and sink, rsy",rsy
         if sstype==-3:
             sx=(np.arange(rsx*width)%rsx).astype(np.int_)
             sy=(np.arange(rsx*width)/rsx).astype(np.int_)
