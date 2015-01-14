@@ -193,6 +193,9 @@ A1) If you convey a modified version of this work:
    <addaction name="separator"/>
   </widget>
   <widget class="QToolBar" name="toolBar_3">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="windowTitle">
     <string>toolBar_3</string>
    </property>
