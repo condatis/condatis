@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-"""Condatis; software to assist with the planning of habitat restoration
+"""
+Condatis; software to assist with the planning of habitat restoration
 
 www.condatis.org.uk
 
