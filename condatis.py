@@ -301,12 +301,10 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
     def openManual(self,stat):
         if stat:
             if self.manualDialog is None:
-                self.manualDialog = ManualDialog(self)
+                self.manualDialog = manualgui.ManualDialog(self)
             self.manualDialog.show()
         else:
             self.manualDialog.hide()
-
-
 
     def doRegister(self):
         print "Registering Condatis"
@@ -328,9 +326,30 @@ class MyMain(QtGui.QMainWindow, econetui.Ui_MainWindow):
         # Make all the directories if they don't exist.
         base=settingsgui.appsettings.path
         makeIfNot(base)
-        for i in ['maps','projects','exports']:
+        for i in ['maps','projects','exports', 'manual']:
             filename=base+'/'+i
-            makeIfNot(filename)    
+            makeIfNot(filename)
+        manpage=base+'/manual/index.html'
+        if not os.path.exists(manpage):
+            with open(manpage,'w+') as f:
+                f.write(""" 
+<html>
+<h1>Condatis Manual</h1>
+<p>
+You don't have the manual installed. You can get it <a href="http://download.condatis.org.uk">here</a>.
+</p>
+
+<p>
+When you have downloaded the manual, save it in your condatis home folder. A folder has been created for you called 'manual'. The manual must be saved here or Candatis will not be able to find it.
+</p>
+
+<p>
+You may also want to download the example maps from the same site. These need to be saved in your condatis home folder under 'maps'
+</p>
+
+</html>
+""")
+            
 
     def settings(self):
         if self.settingsDlg.exec_():

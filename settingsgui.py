@@ -161,7 +161,6 @@ class SettingsDialog(QtGui.QDialog,settingsui.Ui_settingsDialog):
         self.powerReverse.setChecked(s.reverse[3])
 
         self.condatisEdit.setText(s.path)
-        self.manualEdit.setText(s.manpath)
         self.scalebarSB.setProperty("value", s.scalebarlength)
 
     def getRawData(self):
@@ -175,7 +174,6 @@ class SettingsDialog(QtGui.QDialog,settingsui.Ui_settingsDialog):
         s.powercm=self.powerComboBox.currentIndex()
         s.reverse[3]=self.powerReverse.isChecked()
         s.path=self.condatisEdit.text()
-        s.manpath=self.manualEdit.text()
         s.scalebarlength = self.scalebarSB.value()
         return s
         
