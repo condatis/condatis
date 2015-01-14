@@ -1423,6 +1423,7 @@ You may also want to download the example maps from the same site. These need to
                 if self.project.canCalculateScenario():
                     logging.info("Can Calculate")
                     self.actionConductance.setEnabled(True)
+                    logging.info("actionConductance Enabled")
                     
                     if self.project.hasBeenCalculated():
                         logging.info("Has been calculated")
@@ -1433,7 +1434,7 @@ You may also want to download the example maps from the same site. These need to
                         self.actionBackwards_Improvement.setEnabled(True)
                         self.actionView_Population.setEnabled(True)
                         self.actionCalc_Power.setEnabled(True)
-                        self.actionForward_Optimise.setEnabled(True)
+#                        self.actionForward_Optimise.setEnabled(True)
                         if self.project.scenario.__contains__("indlist"):
                             logging.info("Has Dropping")
                             self.actionDropping_Filter.setEnabled(True)
